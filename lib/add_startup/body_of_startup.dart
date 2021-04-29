@@ -14,6 +14,7 @@ class StartUpScreen extends StatefulWidget {
 class _StartUpScreenState extends State<StartUpScreen> {
   ValueChanged<String> onChanged;
   Widget child;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

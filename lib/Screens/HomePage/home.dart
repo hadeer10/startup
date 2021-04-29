@@ -1,43 +1,19 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/profile/body_of_profile.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/models/startup.dart';
 import 'package:flutter_auth/widgets/home_drawer.dart';
-
 import '../../add_startup/add_startup_screen.dart';
 import '../../add_startup/startup_item_screen.dart';
-
+import '../../init.dart';
 class HomeScreen extends StatefulWidget {
   static String id = 'HomeScreen';
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<StartUp> archive = [];
-  final List<StartUp> startupsList = [
-    StartUp(
-        name: 'First Startup',
-        about: 'company for Software ',
-        status: 'Successed'),
-    StartUp(
-        name: 'Second  Startup',
-        about: 'company for Furniture ',
-        status: 'Failed'),
-    StartUp(
-        name: 'Third Startup', about: 'company for Cars ', status: 'Successed'),
-    StartUp(
-        name: 'fourth Startup',
-        about: 'company for Software ',
-        status: 'Successed'),
-    StartUp(
-        name: 'sixth Startup',
-        about: 'company for Software ',
-        status: 'Successed'),
-  ];
 
   var red = Colors.red;
   var grey = Colors.grey;
@@ -45,8 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLiked = true;
   var image;
   GlobalKey<ScaffoldState> _key = GlobalKey();
-
   String whatHappened;
+   addToArchive(StartUp Startup) {
+    setState(() {
+      archive.add(Startup);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,12 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 switch(dismissDirection) {
                   case DismissDirection.endToStart:
                     whatHappened = 'DELETED';
-                    return await _showConfirmationDialog(context, 'Delete' ,) == true;
+                    return await _showConfirmationDialog(context, 'Delete' ) == true;
                   case DismissDirection.startToEnd:
                     whatHappened = 'ARCHIVED';
-                    setState(() {
-                    });
-                    return await _showConfirmationDialog(context, 'Archive' , ) == true;
+                    return await _showConfirmationDialog(context, 'Archive' ) == true;
                   case DismissDirection.horizontal:
                   case DismissDirection.vertical:
                   case DismissDirection.up:
@@ -236,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future<bool> _showConfirmationDialog(BuildContext context, String s ,) {
+  Future<bool> _showConfirmationDialog(BuildContext context, String s ) {
     return showDialog<bool>(
       context: context,
       barrierDismissible: true,
@@ -245,13 +224,16 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text('Do you want to $s this item?'),
           actions: <Widget>[
             FlatButton(
-              child: const Text('Yes'),
+              child: const Text('Yes',style: TextStyle(color: kPrimaryColor),),
               onPressed: () {
-                Navigator.pop(context, true); // showDialog() returns true
-              },
+                if(whatHappened=='ARCHIVED' ||DismissDirection.startToEnd ==true){
+                  addToArchive(startupsList.first);
+                }
+            Navigator.pop(context, true);
+                }
             ),
             FlatButton(
-              child: const Text('No'),
+              child: const Text('No',style: TextStyle(color: kPrimaryColor),),
               onPressed: () {
                 Navigator.pop(context, false); // showDialog() returns false
               },
