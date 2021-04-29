@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter_auth/constants.dart';
 
-import 'Screens/Archive/body_of_archive.dart';
 import 'add_startup/add_startup_screen.dart';
 import 'add_startup/startup_item_screen.dart';
 
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
       routes: {
         StartUpItemScreen.id: (context) => StartUpItemScreen(),
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
-        ArchiveBody.id: (context) => ArchiveBody(),
       },
     );
   }
