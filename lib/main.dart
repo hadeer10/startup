@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         StartUpItemScreen.id: (context) => StartUpItemScreen(),
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
+         ArchiveBody.id: (context) => ArchiveBody(),
       },
     );
   }
