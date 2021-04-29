@@ -6,17 +6,20 @@ class RoundedInputNaneField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
+  final TextEditingController namecontroller;
   const RoundedInputNaneField({
     Key key,
     this.hintText,
     this.icon = Icons.person,
     this.onChanged,
+    this.namecontroller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        controller: namecontroller,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

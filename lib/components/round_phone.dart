@@ -6,17 +6,20 @@ class RoundedInputphoneField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
+  final TextEditingController phonecontroller;
   const RoundedInputphoneField({
     Key key,
     this.hintText,
     this.icon = Icons.phone,
     this.onChanged,
+    this.phonecontroller
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        controller: phonecontroller,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

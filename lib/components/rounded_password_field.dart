@@ -4,9 +4,11 @@ import 'package:flutter_auth/constants.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
+  final TextEditingController passwordcontroller;
   const RoundedPasswordField({
     Key key,
     this.onChanged,
+    this.passwordcontroller
   }) : super(key: key);
   @override
   _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
@@ -19,6 +21,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
     var press;
     return TextFieldContainer(
       child: TextField(
+        controller: widget.passwordcontroller,
         onChanged: widget.onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

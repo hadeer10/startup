@@ -6,11 +6,9 @@ import 'package:flutter_auth/constants.dart';
 
 class StartUpScreen extends StatefulWidget {
   static String id = 'AddStartUpScreen';
-
   @override
   _StartUpScreenState createState() => _StartUpScreenState();
 }
-
 class _StartUpScreenState extends State<StartUpScreen> {
   ValueChanged<String> onChanged;
   Widget child;

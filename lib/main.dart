@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
         StartUpItemScreen.id: (context) => StartUpItemScreen(),
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
         ArchiveBody.id: (context) => ArchiveBody(),
-
       },
     );
   }
