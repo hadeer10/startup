@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Login/components/background.dart';
+import 'package:flutter_auth/Screens/Archive/background.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import '../../init.dart';

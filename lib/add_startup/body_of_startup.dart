@@ -3,16 +3,23 @@ import 'package:flutter_auth/Screens/Login/components/background.dart';
 import 'package:flutter_auth/components/rounded_button.dart';
 import 'package:flutter_auth/components/text_field_container.dart';
 import 'package:flutter_auth/constants.dart';
-
 class StartUpScreen extends StatefulWidget {
   static String id = 'AddStartUpScreen';
+
   @override
   _StartUpScreenState createState() => _StartUpScreenState();
 }
 class _StartUpScreenState extends State<StartUpScreen> {
   ValueChanged<String> onChanged;
   Widget child;
-
+   TextEditingController namecontroller;
+   TextEditingController fieldcontroller;
+   TextEditingController categorycontroller;
+   TextEditingController citycontroller;
+  String name;
+  String field;
+  String category;
+  String city;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,7 +31,14 @@ class _StartUpScreenState extends State<StartUpScreen> {
     );
     Widget cancelButton = FlatButton(
       child: Text("Add" , style: TextStyle(color: kPrimaryColor),),
-      onPressed:  () {},
+      onPressed:  () {
+        setState(() {
+          name=namecontroller.text;
+          field=fieldcontroller.text;
+          category=categorycontroller.text;
+          city=citycontroller.text;
+        });
+      },
     );
     return Background(
       child: SingleChildScrollView(
@@ -40,6 +54,7 @@ class _StartUpScreenState extends State<StartUpScreen> {
             SizedBox(height: size.height * 0.03),
             TextFieldContainer(
               child: TextField(
+                controller: namecontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(
@@ -54,6 +69,7 @@ class _StartUpScreenState extends State<StartUpScreen> {
             ),
             TextFieldContainer(
               child: TextField(
+                controller: citycontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(
@@ -68,6 +84,7 @@ class _StartUpScreenState extends State<StartUpScreen> {
             ),
             TextFieldContainer(
               child: TextField(
+                controller: fieldcontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(
@@ -82,6 +99,7 @@ class _StartUpScreenState extends State<StartUpScreen> {
             ),
             TextFieldContainer(
               child: TextField(
+                controller: categorycontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(

@@ -6,11 +6,14 @@ import 'package:flutter_auth/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class bodyprofile extends StatefulWidget {
+  static String id = 'bodyprofile';
   @override
   _bodyprofileState createState() => _bodyprofileState();
 }
 
 class _bodyprofileState extends State<bodyprofile> {
+
+
   final picker = ImagePicker();
   File image , backimage;
   final backpicker = ImagePicker();
@@ -47,7 +50,8 @@ class _bodyprofileState extends State<bodyprofile> {
                   Stack(
                     children: [
                       FlatButton(
-                        child: backimage == null ? Container(
+                        child: backimage == null ?
+                        Container(
                             width: double.infinity,
                             height: 150,
                             decoration: BoxDecoration(

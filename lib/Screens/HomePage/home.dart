@@ -30,20 +30,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var namecontroller;
+    var onChanged;
+    var size=MediaQuery.of(context).size;
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        backgroundColor: kPrimaryLightColor,
+        backgroundColor: Colors.white,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(Icons.menu_open),
+            icon: Icon(Icons.menu),
             color: kPrimaryColor,
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        title: Text(
-          'Home Screen',
-          style: TextStyle(color: Colors.black),
+        title: Container(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+          width:size.width,
+          decoration: BoxDecoration(
+            color: kPrimaryLightColor,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: TextField(
+              controller: namecontroller,
+              onChanged: onChanged,
+              cursorColor: kPrimaryColor,
+              decoration: InputDecoration(
+                icon: Icon(
+                  Icons.search,
+                  color: kPrimaryColor,
+                ),
+                hintText: 'search',
+                border: InputBorder.none,
+              ),
+          ),
         ),
       ),
       drawer: HomeDrawer(),
