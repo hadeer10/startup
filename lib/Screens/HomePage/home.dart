@@ -1,12 +1,15 @@
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/models/startup.dart';
 import 'package:flutter_auth/widgets/home_drawer.dart';
+import 'package:provider/provider.dart';
 import '../../add_startup/add_startup_screen.dart';
 import '../../add_startup/startup_item_screen.dart';
 import '../../init.dart';
+import '../../modeproviderr.dart';
 class HomeScreen extends StatefulWidget {
   static String id = 'HomeScreen';
   @override
@@ -14,11 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   var red = Colors.red;
   var grey = Colors.grey;
-  bool txt = true;
-  bool isLiked = true;
   var image;
   GlobalKey<ScaffoldState> _key = GlobalKey();
   String whatHappened;
@@ -27,16 +27,24 @@ class _HomeScreenState extends State<HomeScreen> {
       archive.add(Startup);
     });
   }
-
+  var back;
+  var white;
+  var islike;
+  var txt;
   @override
   Widget build(BuildContext context) {
     var namecontroller;
     var onChanged;
     var size=MediaQuery.of(context).size;
+     back = Provider.of<Myproiderr>(context).backofcard;
+     white = Provider.of<Myproiderr>(context).white;
+     image=Provider.of<Myproiderr>(context,listen: true).image;
+     islike=Provider.of<Myproiderr>(context,listen: true).isLiked;
+     txt=Provider.of<Myproiderr>(context,listen: true).txt;
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Provider.of<Myproiderr>(context).appbarcolor,
         leading: Builder(
           builder: (context) => IconButton(
             icon: Icon(Icons.menu),
@@ -45,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         title: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
           width:size.width,
           decoration: BoxDecoration(
             color: kPrimaryLightColor,
@@ -65,6 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
           ),
         ),
+        actions: [
+        IconButton(
+          icon: Icon(Icons.message,
+            color: kPrimaryColor,
+          ),
+          onPressed: (){},
+        ),
+        ],
       ),
       drawer: HomeDrawer(),
       body: Padding(
@@ -111,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return false;
               },
                   child: Card(
+                    color: Provider.of<Myproiderr>(context).backofcard,
                     child: Column(
                       children: [
                         Column(children: [
@@ -123,7 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(width: 2, color: kPrimaryLightColor)),
-                                          child: ClipOval(child: Icon(Icons.camera_alt_outlined,  size: 50.0 ,))):
+                                          child: ClipOval(child: Icon(Icons.camera_alt_outlined,
+                                            color: Provider.of<Myproiderr>(context).white,
+                                            size: 50.0 ,))):
                                       Container(
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(100),
@@ -149,9 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     TextButton(
                                       child: Column(
                                         children: [
-                                          Text( "Hadeer Hassan" , style: TextStyle(color: Colors.black),
+                                          Text(Provider.of<Myproiderr>(context).name , style: TextStyle(color:Provider.of<Myproiderr>(context , listen: true).white),
                                           ),
-                                          Text( "Hadeer@yahoo.com" , style: TextStyle(color: Colors.grey),),
+                                          Text( Provider.of<Myproiderr>(context).email , style: TextStyle(color: Colors.grey),),
                                         ],
                                       ),
                                       onPressed: (){
@@ -172,8 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.pushNamed(context, StartUpItemScreen.id,
                                   arguments: {'name': startupsList[i].name});
                             },
-                            title: Text(startupsList[i].name),
-                            subtitle: Text(startupsList[i].status),
+                            title: Text(startupsList[i].name , style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
+                            subtitle: Text(startupsList[i].status, style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
                           ),
                           Padding(
                             padding: EdgeInsets.all(15),
@@ -185,35 +204,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                     IconButton(
                                       icon: Icon(
                                         Icons.favorite,
-                                        color: isLiked ? grey : red,
+                                        color: Provider.of<Myproiderr>(context,listen: false).isLiked ? grey : red,
                                       ),
                                       onPressed: () {
                                         setState(() {
-                                          isLiked = !isLiked;
-                                          txt = !txt;
+                                          Provider.of<Myproiderr>(context,listen: false).m();
                                         });
                                       },
                                     ),
                                     SizedBox(
                                       width: 6,
                                     ),
-                                    Text(txt ? '0' : '1'),
+                                    Text(txt ? '0' : '1' , style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     IconButton(
-                                      icon: Icon(Icons.message),
+                                      icon: Icon(Icons.message , color: kPrimaryLightColor,),
                                       onPressed: () {},
                                     ),
                                     SizedBox(
                                       width: 3,
                                     ),
-                                    Text('message'),
+                                    Text('message', style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
                                   ],
                                 )
                               ],
                             ),
+                          ),
+                          Divider(
+                            color: Provider.of<Myproiderr>(context).divider,
                           ),
                         ]),
                       ],
@@ -241,7 +262,9 @@ class _HomeScreenState extends State<HomeScreen> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Do you want to $s this item?'),
+          backgroundColor: back,
+          title: Text('Do you want to $s this item?',
+            style: TextStyle(color: white),),
           actions: <Widget>[
             FlatButton(
               child: const Text('Yes',style: TextStyle(color: kPrimaryColor),),

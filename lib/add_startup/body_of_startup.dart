@@ -3,6 +3,9 @@ import 'package:flutter_auth/Screens/Login/components/background.dart';
 import 'package:flutter_auth/components/rounded_button.dart';
 import 'package:flutter_auth/components/text_field_container.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../modeproviderr.dart';
 class StartUpScreen extends StatefulWidget {
   static String id = 'AddStartUpScreen';
 
@@ -20,9 +23,13 @@ class _StartUpScreenState extends State<StartUpScreen> {
   String field;
   String category;
   String city;
+  var white;
+  var back;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    white=Provider.of<Myproiderr>(context ).white;
+    back=Provider.of<Myproiderr>(context).appbarcolor;
     Widget continueButton = FlatButton(
       child: Text("cancel" ,style: TextStyle(color: kPrimaryColor), ),
       onPressed:  () {
@@ -48,7 +55,8 @@ class _StartUpScreenState extends State<StartUpScreen> {
           children: <Widget>[
             Text(
               "Add Start Up",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold
+                , color: Provider.of<Myproiderr>(context).white,),
             ),
             SizedBox(height: size.height * 0.03),
             SizedBox(height: size.height * 0.03),
@@ -119,8 +127,9 @@ class _StartUpScreenState extends State<StartUpScreen> {
                   press: () {
                     setState(() {
                       AlertDialog alert = AlertDialog(
-                        title: Text("Result"),
-                        content: Text("result....."),
+                        backgroundColor: back,
+                        title: Text("Result" , style: TextStyle(color: white),),
+                        content: Text("result....." ,style: TextStyle(color: white),),
                         actions: [
                           cancelButton,
                           continueButton,

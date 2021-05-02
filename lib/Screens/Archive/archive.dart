@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Archive/body_of_archive.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:provider/provider.dart';
+import '../../modeproviderr.dart';
 
 class Archive extends StatefulWidget {
   @override
@@ -15,9 +17,8 @@ class _ArchiveState extends State<Archive> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryLightColor,
-        title: Text('Archive',
-        style: TextStyle(color: Colors.black),
+        backgroundColor: Provider.of<Myproiderr>(context).appbarcolor,
+        title: Text('Archive', style: TextStyle(color: Provider.of<Myproiderr>(context).white,),
         ),
         leading: Builder(
           builder: (context) => IconButton(

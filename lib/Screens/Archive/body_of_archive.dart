@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Archive/background.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:provider/provider.dart';
 import '../../init.dart';
+import '../../modeproviderr.dart';
 
 
 class ArchiveBody extends StatefulWidget {
@@ -15,10 +17,9 @@ class _ArchiveBodyState extends State<ArchiveBody> {
   var image;
   var red = Colors.red;
   var grey = Colors.grey;
-  bool txt = true;
-  bool isLiked = true;
   @override
   Widget build(BuildContext context) {
+    image=Provider.of<Myproiderr>(context,listen: true).image;
     return Background(
       child: Padding(
         padding: const EdgeInsets.all(1.0),
@@ -44,6 +45,7 @@ class _ArchiveBodyState extends State<ArchiveBody> {
             child:
 
             Card(
+              color: Provider.of<Myproiderr>(context).backofcard,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
@@ -70,6 +72,7 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                                           child: Icon(
                                         Icons.camera_alt_outlined,
                                         size: 50.0,
+                                            color: Provider.of<Myproiderr>(context).white,
                                       )))
                                   : Container(
                                       decoration: BoxDecoration(
@@ -100,11 +103,11 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "Hadeer Hassan",
-                                    style: TextStyle(color: Colors.black),
+                                    Provider.of<Myproiderr>(context).name,
+                                    style: TextStyle(color: Provider.of<Myproiderr>(context).white,),
                                   ),
                                   Text(
-                                    "Hadeer@gmail.com",
+                                    Provider.of<Myproiderr>(context).email,
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ],
@@ -123,8 +126,8 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                       ],
                     ),
                     ListTile(
-                      title: Text(archive[i].name),
-                      subtitle: Text(archive[i].status),
+                      title: Text(archive[i].name, style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
+                      subtitle: Text(archive[i].status, style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
                     ),
                     Padding(
                       padding: EdgeInsets.all(10),
@@ -136,31 +139,32 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                               IconButton(
                                 icon: Icon(
                                   Icons.favorite,
-                                  color: isLiked ? grey : red,
+                                  color: Provider.of<Myproiderr>(context,listen: false).isLiked ? grey : red,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    isLiked = !isLiked;
-                                    txt = !txt;
+                                    Provider.of<Myproiderr>(context,listen: false).m();
                                   });
                                 },
                               ),
                               SizedBox(
                                 width: 6,
                               ),
-                              Text(txt ? '0' : '1'),
+                              Text(Provider.of<Myproiderr>(context,listen: true).txt ? '0' : '1', style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
                             ],
                           ),
                           Row(
                             children: [
                               IconButton(
-                                icon: Icon(Icons.message),
+                                icon: Icon(Icons.message,
+                               color: kPrimaryLightColor,
+                                ),
                                 onPressed: () {},
                               ),
                               SizedBox(
                                 width: 3,
                               ),
-                              Text('message'),
+                              Text('message', style: TextStyle(color: Provider.of<Myproiderr>(context).white,)),
                             ],
                           )
                         ],

@@ -4,6 +4,9 @@ import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+import '../modeproviderr.dart';
 
 class HomeDrawer extends StatefulWidget {
   @override
@@ -38,7 +41,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.person ,  color: kPrimaryColor,),
-            title: Text('Profile' ,style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
+            title: Text('Profile' ,style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
+              color: Provider.of<Myproiderr>(context).white,),
             ),
             onTap: () {
               Navigator.push(
@@ -55,7 +59,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             leading: Icon(Icons.home , color: kPrimaryColor,),
             title: Text(
               'Home',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100
+              ,
+                color: Provider.of<Myproiderr>(context).white,
+              ),
+
             ),
             onTap: () {
               Navigator.push(
@@ -72,7 +80,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
             leading: Icon(Icons.settings , color: kPrimaryColor,),
             title: Text(
               'Settings',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
+                color: Provider.of<Myproiderr>(context).white,),
             ),
             onTap: () {},
           ),
@@ -80,7 +89,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
             leading: Icon(Icons.archive , color: kPrimaryColor,),
             title: Text(
               'Archived',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
+                color: Provider.of<Myproiderr>(context).white,),
             ),
             onTap: () {
               Navigator.push(
@@ -95,11 +105,29 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app ,  color: kPrimaryColor,),
-            title: Text('Log Out',style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
+            title: Text('Log Out',style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
+              color: Provider.of<Myproiderr>(context).white,),
             ),
             onTap: () {
             },
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Row(
+              children: [
+                Text("light" ,style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100,color: Provider.of<Myproiderr>(context).white,)),
+                   Switch(
+                    value: Provider.of<Myproiderr>(context , listen: true).vals,
+                    onChanged:(bool val){
+                      Provider.of<Myproiderr>(context , listen: false).switchs(val);
+                    } ,
+                    activeColor: kPrimaryColor,
+                    inactiveThumbColor: kPrimaryColor,
+                  ),
+                Text("dark",style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100,color: Provider.of<Myproiderr>(context).white,)),
+              ],
+            ),
+          ),
         ],
       ),
     );
