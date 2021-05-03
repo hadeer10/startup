@@ -19,6 +19,7 @@ class _bodyprofileState extends State<bodyprofile> {
   var bacimage;
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     white=Provider.of<Myproiderr>(context ).white;
     back=Provider.of<Myproiderr>(context).appbarcolor;
     image=Provider.of<Myproiderr>(context,listen: true).image;
@@ -37,23 +38,52 @@ class _bodyprofileState extends State<bodyprofile> {
                 Stack(
                   children: [
                     FlatButton(
-                      child: bacimage == null ? Container(
-                          width: double.infinity,
-                          height: 150,
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 1, color: kPrimaryLightColor)),
-                          child: Icon(Icons.camera_alt_outlined,  size: 100.0 ,
-                          color: white,
-                          )):
+                      child: bacimage == null ?Container(
+                            width: mediaQuery.size.width,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                left: BorderSide(
+                                  color: kPrimaryLightColor,
+                                  width: 1,
+                                ),
+                                bottom: BorderSide(
+                                  color: kPrimaryLightColor,
+                                  width: 1,
+                                ),
+                                right: BorderSide(
+                                  color: kPrimaryLightColor,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                            child: Icon(Icons.camera_alt_outlined,  size: 100.0 ,
+                            color: white,
+                            ))
+                      :
                       Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: mediaQuery.size.width,
                         height: 150,
                         decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: kPrimaryLightColor)),
+                          border: Border(
+                            left: BorderSide(
+                              color: kPrimaryLightColor,
+                              width: 1,
+                            ),
+                            bottom: BorderSide(
+                              color: kPrimaryLightColor,
+                              width: 1,
+                            ),
+                            right: BorderSide(
+                              color: kPrimaryLightColor,
+                              width: 1,
+                            ),
+                          ),
+                        ),
                         child: Image.file(
                           bacimage,
                           height: 150,
-                          width: MediaQuery.of(context).size.width,
+                          width: mediaQuery.size.width,
                           fit: BoxFit.fill,
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
+import 'Screens/chat_screen/chat_details.dart';
 import 'Screens/profile/body_of_profile.dart';
 import 'add_startup/add_startup_screen.dart';
 import 'add_startup/startup_item_screen.dart';
@@ -35,7 +36,7 @@ class _MyHomePage extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       themeMode: Provider.of<Myproiderr>(context).tm,
       theme: ThemeData(primaryColor: Colors.white ,  scaffoldBackgroundColor: Colors.white, ),
-      darkTheme: ThemeData(primaryColor: HexColor("#050613") ,  scaffoldBackgroundColor: Provider.of<Myproiderr>(context).appbarcolor,
+      darkTheme: ThemeData(primaryColor: Colors.black ,  scaffoldBackgroundColor: Provider.of<Myproiderr>(context).appbarcolor,
           canvasColor: Provider.of<Myproiderr>(context).appbarcolor,
       ),
       title: 'MyHomePage',
@@ -44,6 +45,7 @@ class _MyHomePage extends State<MyHomePage> {
         StartUpItemScreen.id: (context) => StartUpItemScreen(),
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
         bodyprofile.id: (context) => bodyprofile(),
+        chatdetails.id: (context) => chatdetails(),
       },
     );
   }

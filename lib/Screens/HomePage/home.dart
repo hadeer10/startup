@@ -1,6 +1,5 @@
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/chat_screen/chat_screen.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/models/startup.dart';
@@ -37,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var onChanged;
     var size=MediaQuery.of(context).size;
      back = Provider.of<Myproiderr>(context).backofcard;
-     white = Provider.of<Myproiderr>(context).white;
+     white =Provider.of<Myproiderr>(context).white;
      image=Provider.of<Myproiderr>(context,listen: true).image;
      islike=Provider.of<Myproiderr>(context,listen: true).isLiked;
      txt=Provider.of<Myproiderr>(context,listen: true).txt;
@@ -55,10 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Container(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
           width:size.width,
-          decoration: BoxDecoration(
-            color: kPrimaryLightColor,
-            borderRadius: BorderRadius.circular(30),
-          ),
           child: TextField(
               controller: namecontroller,
               onChanged: onChanged,
@@ -69,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: kPrimaryColor,
                 ),
                 hintText: 'search',
+                hintStyle: TextStyle( color: Colors.grey , height: 1),
                 border: InputBorder.none,
               ),
           ),
@@ -78,7 +74,14 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: Icon(Icons.message,
             color: kPrimaryColor,
           ),
-          onPressed: (){},
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => chatscreen(),
+              ),
+            );
+          },
         ),
         ],
       ),
@@ -168,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     TextButton(
                                       child: Column(
                                         children: [
-                                          Text(Provider.of<Myproiderr>(context).name , style: TextStyle(color:Provider.of<Myproiderr>(context , listen: true).white),
+                                          Text(Provider.of<Myproiderr>(context).name , style: TextStyle(color:white),
                                           ),
                                           Text( Provider.of<Myproiderr>(context).email , style: TextStyle(color: Colors.grey),),
                                         ],
@@ -222,7 +225,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     IconButton(
                                       icon: Icon(Icons.message , color: kPrimaryLightColor,),
-                                      onPressed: () {},
+                                      onPressed: () {
+
+                                      },
                                     ),
                                     SizedBox(
                                       width: 3,

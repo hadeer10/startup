@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../modeproviderr.dart';
 
 class StartUpItemScreen extends StatelessWidget {
   static String id = 'StartUpItemScreen';
@@ -9,13 +12,13 @@ class StartUpItemScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('StartUp Item'),
+        title: Text('StartUp Item',),
       ),
       body: Container(
         padding: EdgeInsets.all(10),
         child: Center(
           child: Container(
-            child: Text(args['name']),
+            child: Text(args['name'] , style: TextStyle(color: Provider.of<Myproiderr>(context).white)),
           ),
         ),
       ),

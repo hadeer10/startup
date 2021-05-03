@@ -42,14 +42,14 @@ void switchs(bool val){
     tm=ThemeMode.light;
     backofcard = Colors.white;
     appbarcolor=Colors.white;
-    white=HexColor("#050613");
+    white=Colors.black;
     divider=Colors.white;
     light=kPrimaryLightColor;
   }
   else{
     tm=ThemeMode.dark;
-    backofcard = HexColor("#050613");
-    appbarcolor=HexColor("#050613");
+    backofcard = Colors.black;
+    appbarcolor=Colors.black;
     white=Colors.white;
     divider=Colors.grey;
     light=kPrimaryColor;
