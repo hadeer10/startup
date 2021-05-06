@@ -5,6 +5,7 @@ import 'package:flutter_auth/Screens/Archive/body_of_archive.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:provider/provider.dart';
+import '../../init.dart';
 import '../../modeproviderr.dart';
 
 class Archive extends StatefulWidget {
@@ -37,7 +38,12 @@ class _ArchiveState extends State<Archive> {
           ),
         ),
       ),
-      body: ArchiveBody(),
+      body:
+      archive.isEmpty
+          ? Center(
+          child: Text('No StartUp Archived', style: TextStyle(color: Provider.of<Myproiderr>(context).white,)))
+          :
+      ArchiveBody(),
     );
   }
 }

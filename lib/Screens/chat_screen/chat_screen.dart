@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/widgets/home_drawer.dart';
 import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../../modeproviderr.dart';
@@ -23,11 +24,38 @@ class chatscreen extends StatelessWidget {
   ];
   var namecontroller;
   var onChanged;
+  var image;
   @override
   Widget build(BuildContext context) {
+    image=Provider.of<Myproiderr>(context,listen: true).image;
     return Scaffold(
        appBar: AppBar(
       backgroundColor: Provider.of<Myproiderr>(context).appbarcolor,
+         leading: Builder(
+           builder: (context) => FlatButton(
+             child: image == null ? Container(
+                 decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(100),
+                     border: Border.all(width: 1, color: kPrimaryLightColor)),
+                 child: ClipOval(child: Icon(Icons.camera_alt_outlined,
+                   color: Provider.of<Myproiderr>(context).white,
+                   size: 23.0 ,))):
+             Container(
+               decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(90),
+                   border: Border.all(width: 1, color: kPrimaryLightColor)),
+               child: ClipOval(
+                 child: Image.file(
+                   image,
+                   height: 25,
+                   width: 100,
+                   fit: BoxFit.cover,
+                 ),
+               ),
+             ),
+             onPressed: () => Scaffold.of(context).openDrawer(),
+           ),
+         ),
       title: Container(
         padding: EdgeInsets.symmetric(horizontal: 3, vertical: 3),
         child: TextField(
@@ -46,6 +74,7 @@ class chatscreen extends StatelessWidget {
         ),
       ),
        ),
+      drawer: HomeDrawer(),
       body: ListView.builder(
         itemCount: persondetails.length,
           itemBuilder:  (context, i) =>  InkWell(

@@ -86,7 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: HomeDrawer(),
-      body: Padding(
+      body:
+      startupsList.isEmpty
+          ? Center(
+          child: Text('No Startup.', style: TextStyle(color: Provider.of<Myproiderr>(context).white,)))
+          :
+      Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
             itemCount: startupsList.length,
