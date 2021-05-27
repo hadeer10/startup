@@ -40,7 +40,7 @@ class _bodyprofileState extends State<bodyprofile> {
                     FlatButton(
                       child: bacimage == null ?Container(
                             width: mediaQuery.size.width,
-                            height: 150,
+                            height: 130,
                             decoration: BoxDecoration(
                               border: Border(
                                 left: BorderSide(
@@ -63,7 +63,7 @@ class _bodyprofileState extends State<bodyprofile> {
                       :
                       Container(
                         width: mediaQuery.size.width,
-                        height: 150,
+                        height: 130,
                         decoration: BoxDecoration(
                           border: Border(
                             left: BorderSide(
@@ -135,7 +135,7 @@ class _bodyprofileState extends State<bodyprofile> {
                       height: 50,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 83, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(110, 85, 0, 0),
                       child: FlatButton(
                         child: image == null ? Container(
                             decoration: BoxDecoration(
