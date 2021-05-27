@@ -56,7 +56,7 @@ void switchs(bool val){
   }
   notifyListeners();
 }
-void m(){
+Future<bool> m () async{
   isLiked = !isLiked;
   txt = !txt;
 }

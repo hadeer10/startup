@@ -9,6 +9,8 @@ import '../../add_startup/add_startup_screen.dart';
 import '../../add_startup/startup_item_screen.dart';
 import '../../init.dart';
 import '../../modeproviderr.dart';
+import 'package:like_button/like_button.dart';
+
 class HomeScreen extends StatefulWidget {
   static String id = 'HomeScreen';
   @override
@@ -209,7 +211,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Row(
                                   children: [
-                                    IconButton(
+                                    LikeButton(
+                                      isLiked: Provider.of<Myproiderr>(context,listen: false).isLiked ?false : true,
+                                      likeCount: Provider.of<Myproiderr>(context,listen: false).txt ? 0 : 1,
+                                    ),
+                                    /*IconButton(
                                       icon: Icon(
                                         Icons.favorite,
                                         color: Provider.of<Myproiderr>(context,listen: false).isLiked ? grey : red,
@@ -224,6 +230,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 6,
                                     ),
                                     Text(txt ? '0' : '1' , style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
+
+                                     */
                                   ],
                                 ),
                                 Row(

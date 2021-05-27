@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Archive/background.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 import '../../init.dart';
 import '../../modeproviderr.dart';
@@ -21,7 +22,12 @@ class _ArchiveBodyState extends State<ArchiveBody> {
   Widget build(BuildContext context) {
     image=Provider.of<Myproiderr>(context,listen: true).image;
     return Background(
-      child: Padding(
+      child:
+      startupsList.isEmpty
+          ? Center(
+          child: Text('No Archived Startup.', style: TextStyle(color: Provider.of<Myproiderr>(context).white,)))
+          :
+      Padding(
         padding: const EdgeInsets.all(1.0),
         child: ListView.builder(
           itemCount: archive.length,
@@ -136,7 +142,11 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                         children: [
                           Row(
                             children: [
-                              IconButton(
+                              LikeButton(
+                                isLiked: Provider.of<Myproiderr>(context,listen: false).isLiked ?false : true,
+                                likeCount: Provider.of<Myproiderr>(context,listen: false).txt ? 0 : 1,
+                              ),
+                              /*IconButton(
                                 icon: Icon(
                                   Icons.favorite,
                                   color: Provider.of<Myproiderr>(context,listen: false).isLiked ? grey : red,
@@ -151,6 +161,8 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                                 width: 6,
                               ),
                               Text(Provider.of<Myproiderr>(context,listen: true).txt ? '0' : '1', style: TextStyle(color: Provider.of<Myproiderr>(context).white,),),
+
+                               */
                             ],
                           ),
                           Row(
