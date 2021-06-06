@@ -148,18 +148,10 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                             TextButton(
-                              child: Column(
-                                children: [
-                                  Text(
-                                   'user name ',
+                              child: Text(
+                                   'full name ',
                                     style: TextStyle(color: white),
                                   ),
-                                  Text(
-                                    'user email',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
                               onPressed: () {
                               /*  Navigator.push(
                                   context,

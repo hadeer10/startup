@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Archive/background.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 import '../../modeproviderr.dart';
 
@@ -16,127 +15,26 @@ class _bodyprofileState extends State<bodyprofile> {
   var back;
   var white;
   var image;
-  var bacimage;
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
     white=Provider.of<Myproiderr>(context ).white;
     back=Provider.of<Myproiderr>(context).appbarcolor;
     image=Provider.of<Myproiderr>(context,listen: true).image;
-    bacimage=Provider.of<Myproiderr>(context,listen: true).backimage;
     return Background(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 1,
           ),
           SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    FlatButton(
-                      child: bacimage == null ?Container(
-                            width: mediaQuery.size.width,
-                            height: 130,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: kPrimaryLightColor,
-                                  width: 1,
-                                ),
-                                bottom: BorderSide(
-                                  color: kPrimaryLightColor,
-                                  width: 1,
-                                ),
-                                right: BorderSide(
-                                  color: kPrimaryLightColor,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                            child: Icon(Icons.camera_alt_outlined,  size: 100.0 ,
-                            color: white,
-                            ))
-                      :
-                      Container(
-                        width: mediaQuery.size.width,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(
-                              color: kPrimaryLightColor,
-                              width: 1,
-                            ),
-                            bottom: BorderSide(
-                              color: kPrimaryLightColor,
-                              width: 1,
-                            ),
-                            right: BorderSide(
-                              color: kPrimaryLightColor,
-                              width: 1,
-                            ),
-                          ),
-                        ),
-                        child: Image.file(
-                          bacimage,
-                          height: 150,
-                          width: mediaQuery.size.width,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      onPressed: (){
-                        AlertDialog alart = AlertDialog(
-                          backgroundColor: back,
-                          title: Text('Select photo',style: TextStyle(color: white),),
-                          content: Container(
-                            height: 150,
-                            child: Column(
-                              children: [
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Container(
-                                  color: kPrimaryLightColor,
-                                  child: ListTile(
-                                    title: Text('Camera'),
-                                    leading: Icon(Icons.camera_alt_outlined , color: kPrimaryColor,),
-                                    onTap: () {
-                                      Provider.of<Myproiderr>(context , listen: false).getbackImage(ImageSource.gallery);
-                                    },
-
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  color: kPrimaryLightColor,
-                                  child: ListTile(
-                                    title: Text('Gallery'),
-                                    leading: Icon(Icons.image , color: kPrimaryColor),
-                                    onTap: () {
-                                      Provider.of<Myproiderr>(context , listen: false).getbackImage(ImageSource.gallery);
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                        showDialog(context: context,  builder: (BuildContext context) {
-                          return alart;
-                        },);
-                      },
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(110, 85, 0, 0),
-                      child: FlatButton(
+                SizedBox(
+                  height: 20,
+                ),
+                FlatButton(
                         child: image == null ? Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
@@ -173,7 +71,7 @@ class _bodyprofileState extends State<bodyprofile> {
                                       leading: Icon(Icons.camera_alt_outlined , color: kPrimaryColor,),
                                       onTap: () {
                                         Provider.of<Myproiderr>(context , listen: false).getImage(ImageSource.camera );
-
+                                        Navigator.pop(context);
                                       },
                                     ),
                                   ),
@@ -187,7 +85,7 @@ class _bodyprofileState extends State<bodyprofile> {
                                       leading: Icon(Icons.image , color: kPrimaryColor),
                                       onTap: () {
                                         Provider.of<Myproiderr>(context , listen: false).getImage(ImageSource.gallery);
-
+                                        Navigator.pop(context);
                                       },
                                     ),
                                   )
@@ -200,39 +98,31 @@ class _bodyprofileState extends State<bodyprofile> {
                           },);
                         },
                       ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 7,
                 ),
                 Container(
-                  child: Text(Provider.of<Myproiderr>(context).name , style: TextStyle(fontWeight: FontWeight.bold , color: white),),
-                  padding: EdgeInsets.all(7),
+                 padding: EdgeInsets.symmetric(horizontal: 50, vertical:10),
+                 decoration: BoxDecoration(
+                 color: kPrimaryLightColor,
+                 borderRadius: BorderRadius.circular(29),),
+                  child: Text('full name ', style: TextStyle(fontWeight: FontWeight.bold , color: white),),
+                ),
+                SizedBox(
+                  height: 7,
                 ),
                 Container(
-                  padding: EdgeInsets.all(7),
-                  child: Text(Provider.of<Myproiderr>(context).email , style: TextStyle(color: Colors.grey)),
-                ),
-                Container(
-                  padding: EdgeInsets.all(7),
-                  child: Text(Provider.of<Myproiderr>(context).phone , style: TextStyle(color: white),),
-                ),
-                Container(
-                  padding: EdgeInsets.all(7),
+                  padding: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: kPrimaryLightColor,
+                    borderRadius: BorderRadius.circular(29),),
                   child: Text('Bio' , style: TextStyle(color: Colors.grey)),
                 ),
-                Divider(
-                  color: kPrimaryColor,
-                ),
-                Center(
-                  child: Text('No StartUp' ,
-                    style: TextStyle(color: Colors.grey),),
-                )
               ],
             ),
-
           ),
         ],
       ),
     );
-
   }
 }

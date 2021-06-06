@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Welcome/components/background.dart';
 import 'package:flutter_auth/components/rounded_button.dart';
 import 'package:flutter_auth/components/text_field_container.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../modeproviderr.dart';
+import 'add_startup_screen2.dart';
+import 'body2_of_startup.dart';
 class StartUpScreen extends StatefulWidget {
   static String id = 'AddStartUpScreen';
 
@@ -15,16 +19,22 @@ class StartUpScreen extends StatefulWidget {
 class _StartUpScreenState extends State<StartUpScreen> {
   ValueChanged<String> onChanged;
   Widget child;
-   TextEditingController namecontroller;
-   TextEditingController fieldcontroller;
-   TextEditingController categorycontroller;
-   TextEditingController citycontroller;
-  String name;
-  String field;
-  String category;
-  String city;
+   TextEditingController titlecontroller;
+   TextEditingController contentcontroller;
+   TextEditingController imagecontroller;
+  String title;
+  String content;
+  String image;
+  File imagedisplay;
   var white;
   var back;
+  final picker = ImagePicker();
+  getImage(ImageSource src) async {
+    final pickerpath = await picker.getImage(source: src);
+    if (picker != null) {
+      imagedisplay = File(pickerpath.path);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,10 +50,9 @@ class _StartUpScreenState extends State<StartUpScreen> {
       child: Text("Add" , style: TextStyle(color: kPrimaryColor),),
       onPressed:  () {
         setState(() {
-          name=namecontroller.text;
-          field=fieldcontroller.text;
-          category=categorycontroller.text;
-          city=citycontroller.text;
+          title=titlecontroller.text;
+          content=contentcontroller.text;
+          image=imagecontroller.text;
         });
       },
     );
@@ -62,7 +71,7 @@ class _StartUpScreenState extends State<StartUpScreen> {
             SizedBox(height: size.height * 0.03),
             TextFieldContainer(
               child: TextField(
-                controller: namecontroller,
+                controller: titlecontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(
@@ -70,29 +79,14 @@ class _StartUpScreenState extends State<StartUpScreen> {
                     Icons.drive_file_rename_outline,
                     color: kPrimaryColor,
                   ),
-                  hintText: 'name',
+                  hintText: 'Title',
                   border: InputBorder.none,
                 ),
               ),
             ),
             TextFieldContainer(
-              child: TextField(
-                controller: citycontroller,
-                onChanged: onChanged,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.location_city,
-                    color: kPrimaryColor,
-                  ),
-                  hintText: 'city',
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            TextFieldContainer(
-              child: TextField(
-                controller: fieldcontroller,
+             child: TextField(
+                controller: contentcontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
                 decoration: InputDecoration(
@@ -100,49 +94,100 @@ class _StartUpScreenState extends State<StartUpScreen> {
                     Icons.text_fields,
                     color: kPrimaryColor,
                   ),
-                  hintText: 'field',
+                  hintText: 'Content',
                   border: InputBorder.none,
                 ),
               ),
             ),
-            TextFieldContainer(
-              child: TextField(
-                controller: categorycontroller,
-                onChanged: onChanged,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.category,
-                    color: kPrimaryColor,
+            FlatButton(
+              onPressed: (){
+                AlertDialog alart = AlertDialog(
+                  backgroundColor: back,
+                  title: Text('Select photo',style: TextStyle(color: white),),
+                  content: Container(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        Divider(
+                          color: Colors.black,
+                        ),
+                        Container(
+                          color: kPrimaryLightColor,
+                          child: ListTile(
+                            title: Text('Camera'),
+                            leading: Icon(Icons.camera_alt_outlined , color: kPrimaryColor,),
+                            onTap: () {
+                             getImage(ImageSource.camera );
+                             Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          color: kPrimaryLightColor,
+                          child: ListTile(
+                            title: Text('Gallery'),
+                            leading: Icon(Icons.image , color: kPrimaryColor),
+                            onTap: () {
+                              getImage(ImageSource.gallery);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  hintText: 'category',
-                  border: InputBorder.none,
+                );
+                showDialog(context: context,  builder: (BuildContext context) {
+                  return alart;
+                },);
+              },
+              child:
+              imagedisplay==null
+                  ?
+               Container(
+                 margin: EdgeInsets.symmetric(vertical: 10),
+                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                 width: MediaQuery.of(context).size.width * 0.8,
+                 decoration: BoxDecoration(
+                   color: kPrimaryLightColor,
+                   borderRadius: BorderRadius.circular(29),),
+                 child: Row(
+                   children: [
+                     Icon(Icons.image,color: kPrimaryColor,),
+                     Text('     Image'),
+                   ],
+                 ),
+               ):
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                  color: kPrimaryLightColor,
+                  borderRadius: BorderRadius.circular(29),),
+                child: Container(
+                  child: Image.file(
+                    imagedisplay,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ),
+            ),
             ),
             Container(
               margin: EdgeInsets.all(8),
               child: RoundedButton(
-                  text: "Result",
-                  press: () {
-                    setState(() {
-                      AlertDialog alert = AlertDialog(
-                        backgroundColor: back,
-                        title: Text("Result" , style: TextStyle(color: white),),
-                        content: Text("result....." ,style: TextStyle(color: white),),
-                        actions: [
-                          cancelButton,
-                          continueButton,
-                        ],
-                      );
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return alert;
-                        },
-                      );
-                    });
-                  }),
+                  text: "Next",
+                  press: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return AddStartUpScreen2();
+                    },
+                  )),
+                  ),
             ),
           ],
         ),

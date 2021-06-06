@@ -51,38 +51,6 @@ class _bodyeditState extends State<bodyedit> {
             ),
             TextFieldContainer(
               child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: emailcontroller,
-                onChanged: onChanged,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.email,
-                    color: kPrimaryColor,
-                  ),
-                  hintText: 'Email',
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            TextFieldContainer(
-              child: TextField(
-                keyboardType: TextInputType.phone,
-                controller: phonecontroller,
-                onChanged: onChanged,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.phone,
-                    color: kPrimaryColor,
-                  ),
-                  hintText: 'phone',
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            TextFieldContainer(
-              child: TextField(
                 controller: biocontroller,
                 onChanged: onChanged,
                 cursorColor: kPrimaryColor,
@@ -101,11 +69,6 @@ class _bodyeditState extends State<bodyedit> {
               child: RoundedButton(
                   text: "SAVE",
                   press: () {
-                    Provider.of<Myproiderr>(context , listen: false).editprofile(context, namecontroller.text, emailcontroller.text, phonecontroller.text, biocontroller.text);
-                    namecontroller.text='';
-                    phonecontroller.text='';
-                    biocontroller.text='';
-                    emailcontroller.text='';
                     Toast.show("SAVED", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
                   }),
             ),
