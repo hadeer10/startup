@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
+import 'package:flutter_auth/cubit/create_post_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/my_bloc_observer.dart';
 import 'package:flutter_auth/network/local/cache_helper.dart';
@@ -13,8 +13,6 @@ import 'Screens/chat_screen/chat_details.dart';
 import 'Screens/profile/body_of_profile.dart';
 import 'add_startup/add_startup_screen.dart';
 import 'add_startup/add_startup_screen2.dart';
-import 'add_startup/body2_of_startup.dart';
-import 'add_startup/startup_item_screen.dart';
 import 'modeproviderr.dart';
 
 void main() async {
@@ -45,6 +43,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<HomeCubit>(
               create: (BuildContext context) => HomeCubit()..getPosts()),
+              BlocProvider<CreatePostCubit>(
+        create: (BuildContext context) => CreatePostCubit(),)
               
         ],
         child: ChangeNotifierProvider<Myproiderr>(
@@ -78,11 +78,11 @@ class _MyHomePage extends State<MyHomePage> {
         canvasColor: Provider.of<Myproiderr>(context).appbarcolor,
       ),
       title: 'MyHomePage',
-      home:  HomeScreen(),
+      home:  widget.widget,
       routes: {
-        StartUpItemScreen.id: (context) => StartUpItemScreen(),
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
         AddStartUpScreen2.id: (context) => AddStartUpScreen2(),
+        
         bodyprofile.id: (context) => bodyprofile(),
         chatdetails.id: (context) => chatdetails(),
       },

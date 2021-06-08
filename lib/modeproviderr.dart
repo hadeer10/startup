@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toast/toast.dart';
 
 class Myproiderr with ChangeNotifier{
   bool vals=false;

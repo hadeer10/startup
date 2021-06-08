@@ -1,7 +1,6 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/chat_screen/chat_screen.dart';
-import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/states.dart';
@@ -10,8 +9,6 @@ import 'package:flutter_auth/widgets/home_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import '../../add_startup/add_startup_screen.dart';
-import '../../add_startup/startup_item_screen.dart';
-import '../../init.dart';
 import '../../modeproviderr.dart';
 import 'package:like_button/like_button.dart';
 

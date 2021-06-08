@@ -34,7 +34,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     }).catchError((error) {
      // print(error.toString());
 
-      emit(RegisterErrorState(error.toString()));
+      emit(RegisterErrorState(error.message.toString()));
     });
   }
 

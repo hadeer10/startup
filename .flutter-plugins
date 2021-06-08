@@ -1,12 +1,12 @@
 # This is a generated file; do not edit or check into version control.
-flutter_plugin_android_lifecycle=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.2\\
-fluttertoast=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\fluttertoast-8.0.7\\
-image_picker=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.7.5+3\\
-image_picker_for_web=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker_for_web-2.0.0\\
-path_provider_linux=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-2.0.0\\
-path_provider_windows=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-2.0.1\\
-shared_preferences=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences-2.0.6\\
-shared_preferences_linux=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_linux-2.0.0\\
-shared_preferences_macos=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_macos-2.0.0\\
-shared_preferences_web=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_web-2.0.0\\
-shared_preferences_windows=C:\\Users\\Nafea\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_windows-2.0.0\\
+flutter_plugin_android_lifecycle=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-2.0.2\\
+fluttertoast=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\fluttertoast-8.0.7\\
+image_picker=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.7.5+3\\
+image_picker_for_web=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker_for_web-2.0.0\\
+path_provider_linux=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-2.0.0\\
+path_provider_windows=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-2.0.1\\
+shared_preferences=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences-2.0.6\\
+shared_preferences_linux=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_linux-2.0.0\\
+shared_preferences_macos=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_macos-2.0.0\\
+shared_preferences_web=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_web-2.0.0\\
+shared_preferences_windows=C:\\src\\flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\shared_preferences_windows-2.0.0\\
