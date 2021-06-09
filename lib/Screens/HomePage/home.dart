@@ -1,5 +1,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/HomePage/post_details.dart';
+import 'package:flutter_auth/Screens/HomePage/post_user_profile.dart';
 import 'package:flutter_auth/Screens/chat_screen/chat_screen.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
@@ -127,159 +129,156 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPostItem(context, HomePostsItemModel model) => InkWell(
-        onTap: () {
-          // to open specefic posts home item
-          // Navigator.push(context, MaterialPageRoute(builder: (context)=>null));
-        },
-        child: Card(
-          elevation: 10.0,
-          color: Provider.of<Myproiderr>(context).backofcard,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          margin: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
+  Widget buildPostItem(context, HomePostsItemModel model) => Card(
+        elevation: 10.0,
+        color: Provider.of<Myproiderr>(context).backofcard,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        margin: EdgeInsets.symmetric(horizontal: 8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PostUserProfile(model.user)));
+                    },
+                    child: CircleAvatar(
                       radius: 20.0,
                       backgroundImage: NetworkImage(
                           /*model.user.avatar*/ 'https://image.freepik.com/free-photo/portrait-cheerful-excited-tablet-user-wearing-eyeglasses_1262-18272.jpg'),
                     ),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(model.user.first_name,
-                                style: TextStyle(height: 1.4)),
-                            SizedBox(
-                              width: 7.0,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          model.created_at,
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption
-                              .copyWith(height: 1.4),
-                        )
-                      ],
-                    )),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: Container(
-                    height: 1.0,
-                    width: double.infinity,
-                    color: Colors.grey[300],
                   ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    model.title,
-                    style: Theme.of(context).textTheme.subtitle1,
+                  SizedBox(
+                    width: 15.0,
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    model.content,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 200.0,
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(model.user.first_name,
+                              style: TextStyle(height: 1.4)),
+                          SizedBox(
+                            width: 7.0,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        model.created_at,
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(height: 1.4),
+                      )
+                    ],
+                  )),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                child: Container(
+                  height: 1.0,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.0),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            /*model.image*/ 'https://image.freepik.com/free-photo/start-up-business-creative-people_31965-1843.jpg'),
-                        fit: BoxFit.cover),
-                  ),
+                  color: Colors.grey[300],
                 ),
-                SizedBox(height: 10,),
-                Row(
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PostDetailsScreen(model)));
+                },
+                child: Wrap(
                   children: [
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'category ${model.dataset.category_list}',
-                          )
-                        ],
+                    Align(
+                      alignment: AlignmentDirectional.topStart,
+                      child: Text(
+                        model.title,
+                        style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Funding  ${model.dataset.funding_total_usd}',
-                          )
-                        ],
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      height: 200.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                /*model.image*/ 'https://image.freepik.com/free-photo/start-up-business-creative-people_31965-1843.jpg'),
+                            fit: BoxFit.cover),
                       ),
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Country ${model.dataset.country_code}',
-                          )
-                        ],
-                      ),
+                    SizedBox(
+                      height: 10,
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        child: Row(
-                          children: [
-                            IconButton(
-                                icon: Icon(Icons.favorite_border),
-                                onPressed: () {}),
-                            Text(
-                              model.total_likes.toString(),
-                            )
-                          ],
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'category ${model.dataset.category_list}',
+                              )
+                            ],
+                          ),
                         ),
-                        onTap: () {},
-                      ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Country ${model.dataset.country_code}',
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Score ${model.dataset.score * 100}',
-                          )
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            child: Row(
+                              children: [
+                                IconButton(
+                                    icon: Icon(Icons.favorite_border),
+                                    onPressed: () {}),
+                                Text(
+                                  model.total_likes.toString(),
+                                )
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Score ${model.dataset.score * 100}',
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       );
