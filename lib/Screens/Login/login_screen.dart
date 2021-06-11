@@ -26,9 +26,15 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            showToast(text: 'you Logged in Successfully .', color: kPrimaryColor);
+            showToast(
+                text: 'you Logged in Successfully .', color: kPrimaryColor);
             print(state.loginModel);
-
+            CacheHelper.saveData(key: 'uId', value: state.loginModel.user_id)
+                .then((value) {
+              uId = state.loginModel.user_id;
+              print(uId);
+              print(state.loginModel.user_id);
+            });
             CacheHelper.saveData(
                     key: 'access_token', value: state.loginModel.access)
                 .then((value) {
@@ -115,7 +121,6 @@ class LoginScreen extends StatelessWidget {
                                     email: emailController.text,
                                     password: passwordController.text);
                               }
-                            
                             },
                           ),
                           fallback: (context) => Center(

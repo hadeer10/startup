@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/states.dart';
 import 'package:flutter_auth/models/home_post_model.dart';

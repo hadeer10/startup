@@ -1,7 +1,6 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/post_details.dart';
-import 'package:flutter_auth/Screens/HomePage/post_user_profile.dart';
 import 'package:flutter_auth/Screens/chat_screen/chat_screen.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
@@ -31,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var namecontroller;
     var onChanged;
+    
     var size = MediaQuery.of(context).size;
     back = Provider.of<Myproiderr>(context).backofcard;
     white = Provider.of<Myproiderr>(context).white;
@@ -142,11 +142,11 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
+                   /*   Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  PostUserProfile(model.user)));
+                                  PostUserProfile(model.user)));*/
                     },
                     child: CircleAvatar(
                       radius: 20.0,

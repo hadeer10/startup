@@ -5,6 +5,7 @@ import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/create_post_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/my_bloc_observer.dart';
+import 'package:flutter_auth/cubit/user_profile_cubit/cubit.dart';
 import 'package:flutter_auth/network/local/cache_helper.dart';
 import 'package:flutter_auth/network/remote/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,9 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
+  uId=CacheHelper.getData(key: 'uId');
   accessToken = CacheHelper.getData(key: 'access_token');
+  
   Widget widget;
 // check if user logged in or not
   if (accessToken != null) {
@@ -42,7 +45,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-              create: (BuildContext context) => HomeCubit()..getPosts()),
+              create: (BuildContext context) => HomeCubit()..getPosts()
+              ),
+                BlocProvider<UserProfileCubit>(
+              create: (BuildContext context) =>UserProfileCubit()..getUserProfileData()),
               BlocProvider<CreatePostCubit>(
         create: (BuildContext context) => CreatePostCubit(),)
               
