@@ -42,16 +42,6 @@ class PostDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Text(
-                  model.content,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
               Container(
                 height: 200.0,
                 width: double.infinity,
@@ -66,29 +56,70 @@ class PostDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  model.content,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('score ${model.dataset.score}'),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Text('Score : '),
+                          Text(' ${model.dataset.score}')
+                        ],
+                      )),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('funding_total_usd ${model.dataset.funding_total_usd}'),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Text('country : '),
+                          Text(' ${model.dataset.country_code}')
+                        ],
+                      )),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Text('category  : '),
+                          Text('${model.dataset.category_list}')
+                        ],
+                      ))
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('funding_rounds ${model.dataset.funding_rounds}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('category ${model.dataset.category_list}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('country ${model.dataset.country_code} '),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Text('funding_rounds : '),
+                          Text(' ${model.dataset.funding_rounds}')
+                        ],
+                      )),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Text('funding_total_usd  : '),
+                          Text('${model.dataset.funding_total_usd}')
+                        ],
+                      ))
+                    ],
                   ),
                 ],
               )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
-// used for add_post_screen_2 , after post created 
+
+// used for add_post_screen_2 , after post created
 showAlertDialog(context, Color back, Color white, String score) {
   return showDialog(
       context: context,
@@ -26,3 +27,5 @@ showAlertDialog(context, Color back, Color white, String score) {
         );
       });
 }
+
+

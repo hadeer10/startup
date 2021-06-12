@@ -21,9 +21,9 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
-  uId=CacheHelper.getData(key: 'uId');
+  uId = CacheHelper.getData(key: 'uId');
   accessToken = CacheHelper.getData(key: 'access_token');
-  
+
   Widget widget;
 // check if user logged in or not
   if (accessToken != null) {
@@ -45,13 +45,14 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-              create: (BuildContext context) => HomeCubit()..getPosts()
-              ),
-                BlocProvider<UserProfileCubit>(
-              create: (BuildContext context) =>UserProfileCubit()..getUserProfileData()),
-              BlocProvider<CreatePostCubit>(
-        create: (BuildContext context) => CreatePostCubit(),)
-              
+              create: (BuildContext context) => HomeCubit()..getPosts()),
+          BlocProvider<UserProfileCubit>(
+              create: (BuildContext context) => UserProfileCubit()
+                ..getUserProfileData()
+                ..getUserProfilePosts()),
+          BlocProvider<CreatePostCubit>(
+            create: (BuildContext context) => CreatePostCubit(),
+          )
         ],
         child: ChangeNotifierProvider<Myproiderr>(
           create: (ctx) => Myproiderr(),
@@ -84,11 +85,10 @@ class _MyHomePage extends State<MyHomePage> {
         canvasColor: Provider.of<Myproiderr>(context).appbarcolor,
       ),
       title: 'MyHomePage',
-      home:  widget.widget,
+      home: widget.widget,
       routes: {
         AddStartUpScreen.id: (context) => AddStartUpScreen(),
         AddStartUpScreen2.id: (context) => AddStartUpScreen2(),
-        
         bodyprofile.id: (context) => bodyprofile(),
         chatdetails.id: (context) => chatdetails(),
       },
