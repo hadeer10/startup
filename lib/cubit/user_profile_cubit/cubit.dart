@@ -48,11 +48,11 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
     });
   }
 
-  void updateUserData(String fullName, String bio, String pickedImage) {
+  void updateUserData(String fullName, String bio/*, String pickedImage*/) {
     DioHelper.putData(
             url: '$GETUSERPROFILE$uId/',
             token: 'JWT $accessToken',
-            data: {'first_name': fullName, 'about': bio, 'avatar': pickedImage})
+            data: {'first_name': fullName, 'about': bio/*, 'avatar': pickedImage*/})
         .then((value) {
       print('user updated successfully and data is ${value.data}');
       userModel = UserModel.fromJson(value.data);

@@ -12,7 +12,7 @@ class RoundedFormInputField extends StatelessWidget {
   final TextInputType type;
   final Function onSubmit;
   final Function validate;
-   bool isPassword=false;
+   bool isPassword;
    IconData suffix;
    Function suffixPressed;
 
@@ -22,7 +22,7 @@ class RoundedFormInputField extends StatelessWidget {
       this.validate,
       this.type,
       this.onSubmit,
-      this.isPassword,
+      this.isPassword=false,
       this.suffix,
       this.suffixPressed,
       this.icon ,
@@ -40,7 +40,7 @@ class RoundedFormInputField extends StatelessWidget {
         keyboardType: type,
         onFieldSubmitted: onSubmit,
         onChanged: onChanged,
-       // obscureText: isPassword,
+        obscureText: isPassword,
         
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

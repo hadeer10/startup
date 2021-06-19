@@ -1,6 +1,5 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/user_profile_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/user_profile_cubit/states.dart';
 import 'package:flutter_auth/models/home_post_model.dart';
@@ -104,45 +103,18 @@ class UserProfilePosts extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        /*   Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    PostUserProfile(model.user)));*/
-                      },
-                      child: CircleAvatar(
-                        radius: 20.0,
-                        backgroundImage: NetworkImage(
-                            /*model.user.avatar*/ 'https://image.freepik.com/free-photo/portrait-cheerful-excited-tablet-user-wearing-eyeglasses_1262-18272.jpg'),
-                      ),
-                    ),
+                   
                     SizedBox(
                       width: 15.0,
                     ),
                     Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(model.user.first_name,
-                                style: TextStyle(height: 1.4)),
-                            SizedBox(
-                              width: 7.0,
-                            ),
-                          ],
-                        ),
-                        Text(
+                        child: Text(
                           model.created_at,
                           style: Theme.of(context)
                               .textTheme
                               .caption
                               .copyWith(height: 1.4),
-                        )
-                      ],
-                    )),
+                        )),
                   ],
                 ),
                 Padding(
@@ -186,59 +158,69 @@ class UserProfilePosts extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Row(
+                     //start
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
                         children: [
                           Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            child: Column(
                               children: [
                                 Text(
-                                  'category ${model.dataset.category_list}',
-                                )
+                                  'Category',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.category_list,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
                               ],
                             ),
                           ),
                           Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            child: Column(
                               children: [
                                 Text(
-                                  'Country ${model.dataset.country_code}',
-                                )
+                                  'Country',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.country_code,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Score',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  ((model.dataset.score * 100).toString())
+                                      .substring(0, 2),
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: InkWell(
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                      icon: Icon(Icons.favorite_border),
-                                      onPressed: () {}),
-                                  Text(
-                                    model.total_likes.toString(),
-                                  )
-                                ],
-                              ),
-                              onTap: () {},
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Score ${model.dataset.score * 100}',
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    ),
+                    // end
+
+                      
                     ],
                   ),
                 )

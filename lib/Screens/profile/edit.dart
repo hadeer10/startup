@@ -76,7 +76,7 @@ class Edit extends StatelessWidget {
                               UserProfileCubit.get(context).updateUserData(
                                   namecontroller.text,
                                   biocontroller.text,
-                                  '$profileImage');
+                                 /* '$profileImage'*/);
                                   showToast(text: 'Profile Updated Successfully .');
                                   Navigator.pop(context);
                             }),

@@ -1,13 +1,13 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/post_details.dart';
-import 'package:flutter_auth/Screens/chat_screen/chat_screen.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/states.dart';
 import 'package:flutter_auth/models/home_post_model.dart';
 import 'package:flutter_auth/widgets/home_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../add_startup/add_startup_screen.dart';
 import '../../modeproviderr.dart';
@@ -15,13 +15,14 @@ import '../../modeproviderr.dart';
 //<calculated when request is sent>
 class HomeScreen extends StatelessWidget {
   static String id = 'HomeScreen';
+  final f = new DateFormat('yyyy-MM-dd hh:mm');
 
   var red = Colors.red;
   var grey = Colors.grey;
   var image;
   GlobalKey<ScaffoldState> _key = GlobalKey();
   String whatHappened;
-
+bool isLiked;
   var back;
   var white;
   var islike;
@@ -30,7 +31,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var namecontroller;
     var onChanged;
-    
+int totalLikes;
     var size = MediaQuery.of(context).size;
     back = Provider.of<Myproiderr>(context).backofcard;
     white = Provider.of<Myproiderr>(context).white;
@@ -48,7 +49,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        title: Container(
+        /*  title: Container(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
           width: size.width,
           child: TextField(
@@ -82,11 +83,15 @@ class HomeScreen extends StatelessWidget {
             },
           ),
         ],
+     */
       ),
       drawer: HomeDrawer(),
       body: BlocConsumer<HomeCubit, HomeStates>(builder: (context, state) {
         var cubit = HomeCubit.get(context);
         return ConditionalBuilder(
+            fallback: (context) => Center(
+                  child: CircularProgressIndicator(),
+                ),
             condition: HomeCubit.get(context).model != null,
             builder: (context) => SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
@@ -96,8 +101,22 @@ class HomeScreen extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                           height: 10.0,
                         ),
-                        itemBuilder: (context, index) =>
-                            buildPostItem(context, cubit.model.data[index]),
+                        itemBuilder: (context, index) {
+                         
+                         /* cubit.model.data[index].likes.forEach((element) {
+                             print('element id is ${element.id}');
+                                print('user id ${uId}');
+                            if (element.id == uId) {
+                              
+                              islike=true;
+                            }else{
+                              islike=false;
+                            }
+                          });*/
+                          totalLikes=cubit.model.data[index].total_likes;
+                          return buildPostItem(
+                              context, cubit.model.data[index], isLiked,totalLikes);
+                        },
                         itemCount: cubit.model.data.length,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -129,7 +148,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPostItem(context, HomePostsItemModel model) => Card(
+  Widget buildPostItem(context, HomePostsItemModel model, bool liked,int totalLikess) => Card(
         elevation: 10.0,
         color: Provider.of<Myproiderr>(context).backofcard,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -142,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                   /*   Navigator.push(
+                      /*   Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
@@ -157,13 +176,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: 15.0,
                   ),
-                  Expanded(
-                      child: Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Text(model.user.first_name,
+                          //
+                          Text('${model.user.full_name}',
                               style: TextStyle(height: 1.4)),
                           SizedBox(
                             width: 7.0,
@@ -171,14 +190,14 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        model.created_at,
+                        model.created_at.substring(0, 19),
                         style: Theme.of(context)
                             .textTheme
                             .caption
                             .copyWith(height: 1.4),
                       )
                     ],
-                  )),
+                  ),
                 ],
               ),
               Padding(
@@ -222,59 +241,116 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'category ${model.dataset.category_list}',
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Country ${model.dataset.country_code}',
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            child: Row(
+                    //start
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
                               children: [
-                                IconButton(
-                                    icon: Icon(Icons.favorite_border),
-                                    onPressed: () {}),
                                 Text(
-                                  model.total_likes.toString(),
-                                )
+                                  'Category',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.category_list,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
                               ],
                             ),
-                            onTap: () {},
                           ),
-                        ),
-                        Expanded(
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Country',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.country_code,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Score',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  ((model.dataset.score * 100).toString())
+                                      .substring(0, 2),
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // end
+
+                    Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: InkWell(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              IconButton(
+                                  color:  (HomeCubit.get(context).getFavPost(model.id))
+                                      ? Colors.red
+                                      : Colors.grey,
+                                  icon: Icon(
+                                    Icons.favorite,
+                                  ),
+                                  onPressed: () {
+                                    HomeCubit.get(context)
+                                        .changePostFavourite(model.id);
+                                       
+                                  }),
                               Text(
-                                'Score ${model.dataset.score * 100}',
+                               HomeCubit.get(context).getFavPost(model.id)? (model.total_likes--).toString():(model.total_likes++).toString() ,
                               )
                             ],
                           ),
+                          onTap: () {},
                         ),
-                      ],
-                    ),
+                      ),
+                      Spacer(),
+                      InkWell(
+                        child: Row(
+                          children: [
+                            IconButton(
+                                icon: Icon(
+                                  Icons.comment,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  HomeCubit.get(context).userLikedList.forEach((key, value) { 
+                                         print(key.toString());
+                                       });
+                                }),
+                            Text(
+                              'comment',
+                            )
+                          ],
+                        ),
+                        onTap: () {},
+                      ),
+                    ]),
                   ],
                 ),
               )
@@ -283,8 +359,8 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 }
-//old post ui 
-   /* Padding(
+//old post ui
+/* Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
                 itemCount: cubit.model.data.length,
@@ -432,4 +508,3 @@ class HomeScreen extends StatelessWidget {
                   ]),
                 ),
               )),*/
-        

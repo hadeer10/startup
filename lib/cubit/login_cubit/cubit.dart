@@ -22,12 +22,12 @@ class LoginCubit extends Cubit<LoginStates> {
     });
   }
 
-  IconData suffix = Icons.visibility_outlined;
+  IconData suffix = Icons.visibility_off_outlined;
   bool isPassword = true;
   void changePassWordVisibilaty() {
     isPassword = !isPassword;
     suffix =
-        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
     emit(ChangePasswordVisibilityState());
   }
 }

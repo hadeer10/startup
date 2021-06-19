@@ -7,10 +7,9 @@ class HomeInitializeState extends HomeStates {}
 class HomeLoadingState extends HomeStates {}
 
 class HomeSuccessState extends HomeStates {
- final HomePostsModel model;
+  final HomePostsModel model;
 
   HomeSuccessState(this.model);
-
 }
 
 class HomeErrorState extends HomeStates {
@@ -18,3 +17,7 @@ class HomeErrorState extends HomeStates {
 
   HomeErrorState(this.error);
 }
+
+class ChangeFavouritePostColorSuccessState extends HomeStates {}
+
+class ChangeFavouritePostColorErrorState extends HomeStates {}

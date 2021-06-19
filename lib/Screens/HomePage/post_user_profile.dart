@@ -21,7 +21,7 @@ class PostUserProfile extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Text('name ${user.first_name}'),
+            Text('name ${user.full_name}'),
             SizedBox(
               height: 30,
             ),

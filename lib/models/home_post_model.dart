@@ -12,7 +12,8 @@ class HomePostsItemModel {
   User user;
   DataSet dataset;
   int total_likes;
-  List<dynamic> likes;
+  List<LikesUsers> likes = [];
+  List<dynamic> comments;
   String title;
   String content;
   String image;
@@ -22,23 +23,46 @@ class HomePostsItemModel {
     title = json['title'];
     content = json['content'];
     total_likes = json['total_likes'];
-    likes = json['likes'];
+    json['likes'].forEach((element) {
+      likes.add(LikesUsers.fromJson(element));
+    });
+
+    comments = json['comments'];
     image = json['image'];
     created_at = json['created_at'];
-    user=User.fromJson(json['user']);
-    dataset=DataSet.fromJson(json['dataset']);
+    user = User.fromJson(json['user']);
+    dataset = DataSet.fromJson(json['dataset']);
+  }
+}
+
+class LikesUsers {
+  int id;
+  String email;
+  String user_name;
+  LikesUsers.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    user_name = json['user_name'];
   }
 }
 
 class User {
   int id;
-  String first_name;
+  String full_name;
+  String mobile;
+  String age;
+  String job;
+  String country;
   String about;
   String avatar;
   int user;
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    first_name = json['first_name'];
+    full_name = json['full_name'] == '' ? 'full_name' : json['full_name'];
+    mobile = json['mobile'] ?? 'mobile';
+    age = json['age'] ?? 'age';
+    job = json['job'] ?? 'job';
+    country = json['country'] ?? 'country';
     about = json['about'];
     avatar = json['avatar'];
     user = json['user'];

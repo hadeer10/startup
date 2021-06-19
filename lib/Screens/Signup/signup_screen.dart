@@ -103,7 +103,7 @@ class SignUpScreen extends StatelessWidget {
                               controller: passwordController,
                               type: TextInputType.visiblePassword,
                               icon: Icons.lock,
-                              isPassword: RegisterCubit.get(context).isPassword,
+                              isPassword:RegisterCubit.get(context) .isPassword,
                               suffix: RegisterCubit.get(context).suffix,
                               suffixPressed: () {
                                 RegisterCubit.get(context)

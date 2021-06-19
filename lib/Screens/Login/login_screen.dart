@@ -106,6 +106,12 @@ class LoginScreen extends StatelessWidget {
                             controller: passwordController,
                             type: TextInputType.visiblePassword,
                             icon: Icons.lock,
+                            isPassword: LoginCubit.get(context).isPassword,
+                            suffix: LoginCubit.get(context).suffix,
+                            suffixPressed: () {
+                              LoginCubit.get(context)
+                                  .changePassWordVisibilaty();
+                            },
                             validate: (String value) {
                               if (value.isEmpty) {
                                 return 'password is to short';
