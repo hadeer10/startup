@@ -11,6 +11,7 @@ import 'package:flutter_auth/widgets/rounded_input_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddStartUpScreen2 extends StatelessWidget {
   static String id = 'AddStartUpScreen2';
   var formKey = GlobalKey<FormState>();
@@ -31,8 +32,9 @@ class AddStartUpScreen2 extends StatelessWidget {
     return BlocConsumer<CreatePostCubit, CreatePostStates>(
         listener: (context, state) {
       if (state is CreatePostPart2SuccessState) {
-        String score = state.post2model.score.toString();
-        print('post2 created successfully with score : $score');
+        String score = (state.post2model.score * 100).toString();
+        String subScore = score.substring(0, 3);
+        print('post2 created successfully with score : $subScore');
 
         showAlertDialog(context, back, white, score);
       }
@@ -71,7 +73,7 @@ class AddStartUpScreen2 extends StatelessWidget {
                           return 'total funding must not be empty !';
                         }
                       }),
-                  RoundedFormInputField(
+                /*  RoundedFormInputField(
                       controller: countryCodeController,
                       hintText: 'Country Code',
                       icon: Icons.qr_code_2_outlined,
@@ -80,7 +82,7 @@ class AddStartUpScreen2 extends StatelessWidget {
                         if (value.isEmpty) {
                           return 'Country Code must not be empty !';
                         }
-                      }),
+                      }),*/
                   RoundedFormInputField(
                       controller: fundingRoundsController,
                       hintText: 'Funding Rounds',
@@ -91,8 +93,32 @@ class AddStartUpScreen2 extends StatelessWidget {
                           return 'Funding Round must not be empty !';
                         }
                       }),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 10),
+                    child: DropdownButtonFormField<String>(
+                        validator: (String value) {
+                          if (value == null) {
+                            return 'Country must not be empty !';
+                          }
+                          return null;
+                        },
+                        hint: Text('Select Country '),
+                        value:
+                            CreatePostCubit.get(context).selectedCountryValue,
+                        onChanged: (String value) =>
+                            CreatePostCubit.get(context)
+                                .changeSelectedCountryMenuItem(value),
+                        items: countryList.map((String stringItemValue) {
+                          return DropdownMenuItem<String>(
+                              value: stringItemValue,
+                              child: Text(stringItemValue));
+                        }).toList()),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 10),
                     child: DropdownButtonFormField<String>(
                         validator: (String value) {
                           if (value == null) {
@@ -118,11 +144,11 @@ class AddStartUpScreen2 extends StatelessWidget {
                         press: () {
                           // send create post part 2 and get final result and score
                           if (formKey.currentState.validate()) {
-                          
                             CreatePostCubit.get(context).createPost2(
                                 funding_total_usd:
                                     int.parse(fundingTotalUsedController.text),
-                                country_code: countryCodeController.text,
+                                country_code: CreatePostCubit.get(context)
+                                    .selectedCountryValue,
                                 funding_rounds:
                                     int.parse(fundingRoundsController.text),
                                 category_list:

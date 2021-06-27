@@ -11,6 +11,7 @@ import 'package:flutter_auth/widgets/rounded_input_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddStartUpScreen extends StatelessWidget {
   static String id = 'AddStartUpScreen';
   var formKey = GlobalKey<FormState>();
@@ -20,8 +21,8 @@ class AddStartUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    var white = Provider.of<Myproiderr>(context).white;
-    var back = Provider.of<Myproiderr>(context).appbarcolor;
+    //var white = Provider.of<Myproiderr>(context).white;
+    //var back = Provider.of<Myproiderr>(context).appbarcolor;
     return  BlocConsumer<CreatePostCubit, CreatePostStates>(
       listener: (context, state) {
         if (state is CreatePostPart1SuccessState) {
@@ -76,7 +77,7 @@ class AddStartUpScreen extends StatelessWidget {
                             return 'content must not be empty !';
                           }
                         }),
-                    // TODO: handle get image for post create part 1
+                   
                     /*FlatButton(
                             onPressed: (){
                 AlertDialog alart = AlertDialog(

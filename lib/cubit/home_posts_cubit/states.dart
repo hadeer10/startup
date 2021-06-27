@@ -21,3 +21,17 @@ class HomeErrorState extends HomeStates {
 class ChangeFavouritePostColorSuccessState extends HomeStates {}
 
 class ChangeFavouritePostColorErrorState extends HomeStates {}
+
+class HomeAddCommentLoadingState extends HomeStates {}
+
+class HomeAddCommentSuccessState extends HomeStates {
+  final Comment comment;
+
+  HomeAddCommentSuccessState(this.comment);
+}
+
+class HomeAddCommentErrorState extends HomeStates {
+  final String error;
+
+  HomeAddCommentErrorState(this.error);
+}

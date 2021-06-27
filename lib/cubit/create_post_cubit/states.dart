@@ -1,10 +1,10 @@
-
 import 'package:flutter_auth/models/post1_model.dart';
 import 'package:flutter_auth/models/post2_model.dart';
 
 abstract class CreatePostStates {}
 
 class CreatePostInitialiteState extends CreatePostStates {}
+
 // to create post part 1
 class CreatePostPart1LoadingState extends CreatePostStates {}
 
@@ -34,6 +34,11 @@ class CreatePostPart2ErrorState extends CreatePostStates {
 
   CreatePostPart2ErrorState(this.error);
 }
+
 class SelectMenuItemsucsessState extends CreatePostStates {}
 
 class SelectMenuItemsuErrorState extends CreatePostStates {}
+
+class SelectCountryMenuItemsucsessState extends CreatePostStates {}
+
+class SelectCountryMenuItemErrorState extends CreatePostStates {}

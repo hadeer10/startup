@@ -2,7 +2,9 @@ class HomePostsModel {
   List<HomePostsItemModel> data = [];
   HomePostsModel.fromJson(List json) {
     json.forEach((element) {
-      data.add(HomePostsItemModel.fromJson(element));
+      if (element['dataset'] != null) {
+        data.add(HomePostsItemModel.fromJson(element));
+      }
     });
   }
 }
@@ -13,21 +15,23 @@ class HomePostsItemModel {
   DataSet dataset;
   int total_likes;
   List<LikesUsers> likes = [];
-  List<dynamic> comments;
   String title;
   String content;
   String image;
   String created_at;
+  List<Comment> comments = [];
   HomePostsItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     content = json['content'];
     total_likes = json['total_likes'];
+    json['comments'].forEach((element) {
+      comments.add(Comment.fromJson(element));
+    });
     json['likes'].forEach((element) {
       likes.add(LikesUsers.fromJson(element));
     });
 
-    comments = json['comments'];
     image = json['image'];
     created_at = json['created_at'];
     user = User.fromJson(json['user']);
@@ -93,5 +97,29 @@ class DataSet {
     status = json['status'];
     user = json['user'];
     post = json['post'];
+  }
+}
+
+class Comment {
+  int id;
+  String body;
+  Owner owner;
+  int post;
+  Comment.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    body = json['body'];
+    owner = Owner.fromJson(json['owner']);
+    post = json['post'];
+  }
+}
+
+class Owner {
+  int id;
+  String email;
+  String user_name;
+  Owner.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    user_name = json['user_name'];
   }
 }

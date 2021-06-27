@@ -27,6 +27,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
       emit(HomeSuccessState(model));
     }).catchError((error) {
+      // ignore: unnecessary_brace_in_string_interps
       print('error is ${error}');
 
       emit(HomeErrorState(error.toString()));
@@ -39,19 +40,35 @@ class HomeCubit extends Cubit<HomeStates> {
     return userLikedList[postId] ?? false;
   }
 
-  
   void changePostFavourite(int postId) {
     DioHelper.getData(url: '$POSTLIKE$postId/', token: 'JWT $accessToken')
         .then((value) {
       favouriteModel = FavouriteModel.formJson(value.data);
 
       userLikedList[postId] = favouriteModel.liked;
-     
-        
+      model.data.forEach((element) {
+        if (element.id == postId) {
+          favouriteModel.liked ? element.total_likes++ : element.total_likes--;
+        }
+      });
       emit(ChangeFavouritePostColorSuccessState());
     }).catchError((error) {
       print('post change post fav error is :${error}');
       emit(ChangeFavouritePostColorErrorState());
+    });
+  }
+
+  Comment comment;
+  void addComment(String commentBody, int postId) {
+    emit(HomeAddCommentLoadingState());
+    DioHelper.postData(
+        url: ADDCOMMENT,
+        token: 'JWT $accessToken',
+        data: {'body': commentBody, 'post': postId}).then((value) {
+      comment = Comment.fromJson(value.data);
+      emit(HomeAddCommentSuccessState(comment));
+    }).catchError((error) {
+      emit(HomeAddCommentErrorState(error.message.toString()));
     });
   }
 }

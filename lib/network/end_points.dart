@@ -5,3 +5,4 @@ const CREATEPOST = '/api/posts/postcreate/';
 const GETUSERPROFILE = '/api/profile/';
 const GETUSERPROFILEPOSTS = '/api/profile/posts/';
 const POSTLIKE = '/api/posts/list/like/';
+const ADDCOMMENT = '/api/posts/comments/';

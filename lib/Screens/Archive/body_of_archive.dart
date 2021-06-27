@@ -100,7 +100,7 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => profile(),
+                                    builder: (context) => Profile(),
                                   ),
                                 );
                               },
@@ -122,7 +122,7 @@ class _ArchiveBodyState extends State<ArchiveBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => profile(),
+                                    builder: (context) => Profile(),
                                   ),
                                 );
                               },

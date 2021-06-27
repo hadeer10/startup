@@ -7,11 +7,13 @@ import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../../modeproviderr.dart';
 import 'package:toast/toast.dart';
+// ignore: camel_case_types
 class bodyedit extends StatefulWidget {
   @override
   _bodyeditState createState() => _bodyeditState();
 }
 
+// ignore: camel_case_types
 class _bodyeditState extends State<bodyedit> {
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController emailcontroller=new TextEditingController();

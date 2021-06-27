@@ -7,6 +7,7 @@ import 'package:flutter_auth/cubit/user_profile_cubit/states.dart';
 import 'package:flutter_auth/widgets/rounded_input_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class Edit extends StatelessWidget {
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController biocontroller = new TextEditingController();
@@ -17,7 +18,7 @@ class Edit extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     var profileImage = UserProfileCubit.get(context).profileImage;
     var model = UserProfileCubit.get(context).userModel;
-    namecontroller.text = model.first_name;
+    namecontroller.text = model.full_name;
     biocontroller.text = model.about;
     return BlocConsumer<UserProfileCubit, UserProfileStates>(
         builder: (context, state) {

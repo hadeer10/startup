@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Archive/archive.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/Screens/profile/profile.dart';
 import 'package:flutter_auth/constants.dart';
@@ -49,7 +48,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return profile();
+                    return Profile();
                   },
                 ),
               );
@@ -76,33 +75,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               );
             },
           ),
-          ListTile(
-            leading: Icon(Icons.settings , color: kPrimaryColor,),
-            title: Text(
-              'Settings',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
-                color: Provider.of<Myproiderr>(context).white,),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.archive , color: kPrimaryColor,),
-            title: Text(
-              'Archived',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,
-                color: Provider.of<Myproiderr>(context).white,),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return Archive();
-                  },
-                ),
-              );
-            },
-          ),
+         
           ListTile(
             leading: Icon(Icons.exit_to_app ,  color: kPrimaryColor,),
             title: Text('Log Out',style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100 ,

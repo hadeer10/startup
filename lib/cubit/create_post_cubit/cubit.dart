@@ -51,11 +51,18 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
       emit(CreatePostPart2ErrorState(error.message.toString()));
     });
   }
-
+// category
   String selectedValue;
   void changeSelectedMenuItem(String value) {
     selectedValue = value;
     print(selectedValue);
     emit(SelectMenuItemsucsessState());
+  }
+// country
+   String selectedCountryValue;
+  void changeSelectedCountryMenuItem(String value) {
+    selectedCountryValue = value;
+    print(selectedCountryValue);
+    emit(SelectCountryMenuItemsucsessState());
   }
 }

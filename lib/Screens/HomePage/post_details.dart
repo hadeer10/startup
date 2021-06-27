@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/animation.dart';
 import 'package:flutter_auth/models/home_post_model.dart';
-import 'package:flutter_auth/modeproviderr.dart';
-import 'package:provider/provider.dart';
 
 class PostDetailsScreen extends StatelessWidget {
   HomePostsItemModel model;
   PostDetailsScreen(this.model);
+  
   @override
   Widget build(BuildContext context) {
+    String score=((model.dataset.score * 100).toString())
+                                      .substring(0, 2);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Scaffold(
@@ -177,7 +178,7 @@ class PostDetailsScreen extends StatelessWidget {
                                     //color: ,
                                   ),
                                   Text(
-                                     model.created_at,
+                                    ( model.created_at).substring(0,19),
                                   ),
                                 ],
                               ),
@@ -206,66 +207,111 @@ class PostDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Column(
-                          children: [
-                            Row(
+                         //start
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
                               children: [
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text('Score : ',style: new TextStyle(fontWeight: FontWeight.bold)),
-                                        Text(' ${model.dataset.score}')
-                                      ],
-                                    )),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text('country : ',style: new TextStyle(fontWeight: FontWeight.bold)),
-                                       Text(' ${model.dataset.country_code}')
-                                      ],
-                                    )),
-                                SizedBox(
-                                  width: 3,
+                                Text(
+                                  'Category',
+                                  style: Theme.of(context).textTheme.subtitle2,
                                 ),
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        //tegory  : 
-                                        Text('ca',style: new TextStyle(fontWeight: FontWeight.bold)),
-                                       Text('${model.dataset.category_list}')
-                                      ],
-                                    ))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        Text('funding_rounds : ',style: new TextStyle(fontWeight: FontWeight.bold)),
-                                        Text(' ${model.dataset.funding_rounds}')
-                                      ],
-                                    )),
                                 SizedBox(
-                                  width: 3,
+                                  height: 5,
                                 ),
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        //ing_total_usd  : 
-                                        Text('fund',style: new TextStyle(fontWeight: FontWeight.bold)),
-                                        Text('${model.dataset.funding_total_usd}')
-                                      ],
-                                    ))
+                                Text(
+                                  model.dataset.category_list,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
                               ],
                             ),
-                          ],
-                        )
-                      ],
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Country',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.country_code,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Percentage',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  ('$score %'),
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // end
+                     //start
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Total Funding',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.funding_total_usd.toString(),
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Funding Rounds',
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  model.dataset.funding_rounds.toString(),
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                         
+                        ],
+                      ),
+                    ),
+                    // end
+                        ],
                     ),
                   ),
                 ),

@@ -5,12 +5,14 @@ import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../../modeproviderr.dart';
 
+// ignore: camel_case_types
 class bodyprofile extends StatefulWidget {
   static String id = 'bodyprofile';
   @override
   _bodyprofileState createState() => _bodyprofileState();
 }
 
+// ignore: camel_case_types
 class _bodyprofileState extends State<bodyprofile> {
   var back;
   var white;
@@ -34,6 +36,7 @@ class _bodyprofileState extends State<bodyprofile> {
                 SizedBox(
                   height: 20,
                 ),
+                // ignore: deprecated_member_use
                 FlatButton(
                         child: image == null ? Container(
                             decoration: BoxDecoration(

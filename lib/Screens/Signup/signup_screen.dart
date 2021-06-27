@@ -11,6 +11,7 @@ import 'package:flutter_auth/cubit/register_cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();

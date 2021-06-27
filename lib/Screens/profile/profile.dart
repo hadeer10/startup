@@ -2,7 +2,6 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/HomePage/home.dart';
 import 'package:flutter_auth/Screens/profile/edit.dart';
-import 'package:flutter_auth/Screens/profile/user_profile_posts.dart';
 import 'package:flutter_auth/cubit/user_profile_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/user_profile_cubit/states.dart';
 import 'package:flutter_auth/models/home_post_model.dart';
@@ -11,7 +10,8 @@ import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../../modeproviderr.dart';
 
-class profile extends StatelessWidget {
+// ignore: must_be_immutable
+class Profile extends StatelessWidget {
   static String id = 'AddStartUpScreen';
   var model;
   @override
@@ -19,9 +19,12 @@ class profile extends StatelessWidget {
     return BlocConsumer<UserProfileCubit, UserProfileStates>(
         builder: (context, state) {
       var model = UserProfileCubit.get(context).userProfilePostsModel;
+
+      // ignore: unused_local_variable
       String fullName = 'no user name';
       String avatar =
           'https://image.freepik.com/free-vector/businessman-avatar-character_24877-57842.jpg';
+      // ignore: unused_local_variable
       String bio = 'no user bio';
 
       return Scaffold(
@@ -93,11 +96,10 @@ class profile extends StatelessWidget {
                         height: 5.0,
                       ),
                       Text(
-                        '${UserProfileCubit.get(context).userModel.first_name}',
+                        '${UserProfileCubit.get(context).userModel.full_name}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
-                      
                       Text(
                         '${UserProfileCubit.get(context).userModel.about}',
                         style: Theme.of(context).textTheme.bodyText1,
@@ -117,19 +119,18 @@ class profile extends StatelessWidget {
                             },
                             child: Icon(Icons.edit_outlined)),
                       ),
-                   
-                       ],
+                    ],
                   ),
                   fallback: (context) => Center(
                     child: CircularProgressIndicator(),
                   ),
                 ),
-                
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical:5 ),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ConditionalBuilder(
                     condition:
-                        UserProfileCubit.get(context).userProfilePostsModel != null,
+                        UserProfileCubit.get(context).userProfilePostsModel !=
+                            null,
                     builder: (context) {
                       return SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
@@ -139,8 +140,13 @@ class profile extends StatelessWidget {
                               separatorBuilder: (context, index) => SizedBox(
                                 height: 10.0,
                               ),
-                              itemBuilder: (context, index) =>
-                                  buildPostItem(context, model.data[index], index),
+                              itemBuilder: (context, index) {
+                                String subOfScore =
+                                    ((model.data[index].dataset.score * 100).toString())
+                                        .substring(0, 2);
+                                return buildPostItem(context, model.data[index],
+                                    index, subOfScore);
+                              },
                               itemCount: model.data.length,
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
@@ -172,7 +178,8 @@ class profile extends StatelessWidget {
     });
   }
 
-  Widget buildPostItem(context, HomePostsItemModel model, int index) =>
+  Widget buildPostItem(
+          context, HomePostsItemModel model, int index, String score) =>
       Dismissible(
         confirmDismiss: (direction) async {
           return await showDialog(
@@ -216,8 +223,6 @@ class profile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-               
-               
                 Wrap(
                   children: [
                     Align(
@@ -244,21 +249,21 @@ class profile extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                     Row(
-                  children: [
-                    SizedBox(
-                      width: 15.0,
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Expanded(
+                            child: Text(
+                          model.created_at,
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(height: 1.4),
+                        )),
+                      ],
                     ),
-                    Expanded(
-                        child: Text(
-                      model.created_at,
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .copyWith(height: 1.4),
-                    )),
-                  ],
-                ),
                     //start
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -269,8 +274,7 @@ class profile extends StatelessWidget {
                               children: [
                                 Text(
                                   'Category',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2,
+                                  style: Theme.of(context).textTheme.subtitle2,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -287,8 +291,7 @@ class profile extends StatelessWidget {
                               children: [
                                 Text(
                                   'Country',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2,
+                                  style: Theme.of(context).textTheme.subtitle2,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -304,18 +307,15 @@ class profile extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  'Score',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2,
+                                  'Percentage',
+                                  style: Theme.of(context).textTheme.subtitle2,
                                 ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  ((model.dataset.score * 100).toString())
-                                      .substring(0, 2),
-                                  style:
-                                      Theme.of(context).textTheme.subtitle1,
+                                  ('$score %'),
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
                               ],
                             ),

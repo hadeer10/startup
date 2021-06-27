@@ -4,6 +4,7 @@ import 'package:flutter_auth/constants.dart';
 
 // used ////////
 
+// ignore: must_be_immutable
 class RoundedFormInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;

@@ -1,6 +1,8 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/HomePage/comments.dart';
 import 'package:flutter_auth/Screens/HomePage/post_details.dart';
+import 'package:flutter_auth/Screens/HomePage/post_user_profile.dart';
 import 'package:flutter_auth/constants.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/cubit.dart';
 import 'package:flutter_auth/cubit/home_posts_cubit/states.dart';
@@ -22,7 +24,7 @@ class HomeScreen extends StatelessWidget {
   var image;
   GlobalKey<ScaffoldState> _key = GlobalKey();
   String whatHappened;
-bool isLiked;
+  bool isLiked;
   var back;
   var white;
   var islike;
@@ -31,7 +33,7 @@ bool isLiked;
   Widget build(BuildContext context) {
     var namecontroller;
     var onChanged;
-int totalLikes;
+    int totalLikes;
     var size = MediaQuery.of(context).size;
     back = Provider.of<Myproiderr>(context).backofcard;
     white = Provider.of<Myproiderr>(context).white;
@@ -102,8 +104,7 @@ int totalLikes;
                           height: 10.0,
                         ),
                         itemBuilder: (context, index) {
-                         
-                         /* cubit.model.data[index].likes.forEach((element) {
+                          /* cubit.model.data[index].likes.forEach((element) {
                              print('element id is ${element.id}');
                                 print('user id ${uId}');
                             if (element.id == uId) {
@@ -113,9 +114,12 @@ int totalLikes;
                               islike=false;
                             }
                           });*/
-                          totalLikes=cubit.model.data[index].total_likes;
-                          return buildPostItem(
-                              context, cubit.model.data[index], isLiked,totalLikes);
+                          String score =
+                              '${cubit.model.data[index].dataset.score * 100}'
+                                  .substring(0, 2);
+                          totalLikes = cubit.model.data[index].total_likes;
+                          return buildPostItem(context, cubit.model.data[index],
+                              isLiked, totalLikes, score);
                         },
                         itemCount: cubit.model.data.length,
                         shrinkWrap: true,
@@ -148,7 +152,9 @@ int totalLikes;
     );
   }
 
-  Widget buildPostItem(context, HomePostsItemModel model, bool liked,int totalLikess) => Card(
+  Widget buildPostItem(context, HomePostsItemModel model, bool liked,
+          int totalLikess, String scoreFinal) =>
+      Card(
         elevation: 10.0,
         color: Provider.of<Myproiderr>(context).backofcard,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -161,11 +167,11 @@ int totalLikes;
                 children: [
                   InkWell(
                     onTap: () {
-                      /*   Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  PostUserProfile(model.user)));*/
+                                  PostUserProfile(model.user)));
                     },
                     child: CircleAvatar(
                       radius: 20.0,
@@ -284,15 +290,14 @@ int totalLikes;
                             child: Column(
                               children: [
                                 Text(
-                                  'Score',
+                                  'Percentage',
                                   style: Theme.of(context).textTheme.subtitle2,
                                 ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  ((model.dataset.score * 100).toString())
-                                      .substring(0, 2),
+                                  ('$scoreFinal %'),
                                   style: Theme.of(context).textTheme.subtitle1,
                                 ),
                               ],
@@ -310,7 +315,8 @@ int totalLikes;
                           child: Row(
                             children: [
                               IconButton(
-                                  color:  (HomeCubit.get(context).getFavPost(model.id))
+                                  color: (HomeCubit.get(context)
+                                          .getFavPost(model.id))
                                       ? Colors.red
                                       : Colors.grey,
                                   icon: Icon(
@@ -319,10 +325,11 @@ int totalLikes;
                                   onPressed: () {
                                     HomeCubit.get(context)
                                         .changePostFavourite(model.id);
-                                       
                                   }),
-                              Text(
-                               HomeCubit.get(context).getFavPost(model.id)? (model.total_likes--).toString():(model.total_likes++).toString() ,
+                              Text(model.total_likes.toString()
+                               /* HomeCubit.get(context).getFavPost(model.id)
+                                    ? (model.total_likes--).toString()
+                                    : (model.total_likes++).toString()*/,
                               )
                             ],
                           ),
@@ -338,17 +345,19 @@ int totalLikes;
                                   Icons.comment,
                                   color: Colors.grey,
                                 ),
-                                onPressed: () {
-                                  HomeCubit.get(context).userLikedList.forEach((key, value) { 
-                                         print(key.toString());
-                                       });
-                                }),
+                                onPressed: () {}),
                             Text(
                               'comment',
                             )
                           ],
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Comments(model.comments)),
+                          );
+                        },
                       ),
                     ]),
                   ],

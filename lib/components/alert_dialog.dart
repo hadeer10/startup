@@ -13,7 +13,7 @@ showAlertDialog(context, Color back, Color white, String score) {
             style: TextStyle(color: white),
           ),
           content: Text(
-            'Your StartUp Score is : $score',
+            'Your StartUp Percentage is : ${score} %',
             style: TextStyle(color: white),
           ),
           actions: [
