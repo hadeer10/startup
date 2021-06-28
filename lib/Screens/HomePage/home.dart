@@ -90,21 +90,22 @@ class HomeScreen extends StatelessWidget {
       drawer: HomeDrawer(),
       body: BlocConsumer<HomeCubit, HomeStates>(builder: (context, state) {
         var cubit = HomeCubit.get(context);
-        return ConditionalBuilder(
-            fallback: (context) => Center(
-                  child: CircularProgressIndicator(),
-                ),
-            condition: HomeCubit.get(context).model != null,
-            builder: (context) => SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
-                          height: 10.0,
-                        ),
-                        itemBuilder: (context, index) {
-                          /* cubit.model.data[index].likes.forEach((element) {
+        return RefreshIndicator(
+            child: ConditionalBuilder(
+                fallback: (context) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                condition: HomeCubit.get(context).model != null,
+                builder: (context) => SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 10.0,
+                            ),
+                            itemBuilder: (context, index) {
+                              /* cubit.model.data[index].likes.forEach((element) {
                              print('element id is ${element.id}');
                                 print('user id ${uId}');
                             if (element.id == uId) {
@@ -114,23 +115,31 @@ class HomeScreen extends StatelessWidget {
                               islike=false;
                             }
                           });*/
-                          String score =
-                              '${cubit.model.data[index].dataset.score * 100}'
-                                  .substring(0, 2);
-                          totalLikes = cubit.model.data[index].total_likes;
-                          return buildPostItem(context, cubit.model.data[index],
-                              isLiked, totalLikes, score);
-                        },
-                        itemCount: cubit.model.data.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                              String score =
+                                  '${cubit.model.data[index].dataset.score * 100}'
+                                      .substring(0, 2);
+                              totalLikes = cubit.model.data[index].total_likes;
+                              return buildPostItem(
+                                  context,
+                                  cubit.model.data[index],
+                                  isLiked,
+                                  totalLikes,
+                                  score);
+                            },
+                            itemCount: cubit.model.data.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        height: 8,
-                      )
-                    ],
-                  ),
-                ));
+                    )),
+            onRefresh: () async{
+              HomeCubit.get(context).getPosts();
+              return await true;
+            });
       }, listener: (context, state) {
         if (state is HomeSuccessState) {
           print(state.model.toString());
@@ -167,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                        Navigator.push(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
@@ -326,10 +335,12 @@ class HomeScreen extends StatelessWidget {
                                     HomeCubit.get(context)
                                         .changePostFavourite(model.id);
                                   }),
-                              Text(model.total_likes.toString()
-                               /* HomeCubit.get(context).getFavPost(model.id)
+                              Text(
+                                model.total_likes.toString()
+                                /* HomeCubit.get(context).getFavPost(model.id)
                                     ? (model.total_likes--).toString()
-                                    : (model.total_likes++).toString()*/,
+                                    : (model.total_likes++).toString()*/
+                                ,
                               )
                             ],
                           ),

@@ -23,6 +23,7 @@ void main() async {
   await CacheHelper.init();
   uId = CacheHelper.getData(key: 'uId');
   accessToken = CacheHelper.getData(key: 'access_token');
+  refreshToken = CacheHelper.getData(key: 'refresh');
 
   Widget widget;
 // check if user logged in or not

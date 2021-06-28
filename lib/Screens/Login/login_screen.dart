@@ -35,15 +35,25 @@ class LoginScreen extends StatelessWidget {
               print(uId);
               print(state.loginModel.user_id);
             });
+             CacheHelper.saveData(
+                    key: 'refresh', value: state.loginModel.refresh)
+                .then((value) {
+              
+              refreshToken=state.loginModel.refresh;
+              
+              print(state.loginModel.refresh);
+               });
             CacheHelper.saveData(
                     key: 'access_token', value: state.loginModel.access)
                 .then((value) {
               accessToken = state.loginModel.access;
+              refreshToken=state.loginModel.refresh;
               print(accessToken);
               print(state.loginModel.access);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => HomeScreen()));
             });
+            
           }
           if (state is LoginErrorState) {
             showToast(

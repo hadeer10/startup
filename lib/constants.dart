@@ -4,6 +4,7 @@ const kPrimaryColor = Color(0xFF6F35A5);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 const kErrorColor = Color(0xFFE57373);
 String accessToken = '';
+String refreshToken='';
 int uId = 0;
 var categoryList = [
   '3D',

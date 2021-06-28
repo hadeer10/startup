@@ -3,6 +3,7 @@ import 'package:flutter_auth/cubit/home_posts_cubit/states.dart';
 import 'package:flutter_auth/models/favourite_model.dart';
 import 'package:flutter_auth/models/home_post_model.dart';
 import 'package:flutter_auth/network/end_points.dart';
+import 'package:flutter_auth/network/local/cache_helper.dart';
 import 'package:flutter_auth/network/remote/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +35,20 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+  void logout() {
+    
+    DioHelper.postData( url: LOGOUT,data: {'refresh_token':refreshToken})
+        .then((value) {
+      print('user logged out successfully ');
+
+
+      emit(HomeUserLogoutSuccessState());
+    }).catchError((error) {
+      print('error logout  is $error');
+      emit(HomeUserLogoutErrorState(error.toString()));
+    });
+  }
+
   FavouriteModel favouriteModel;
 
   bool getFavPost(int postId) {
@@ -53,7 +68,7 @@ class HomeCubit extends Cubit<HomeStates> {
       });
       emit(ChangeFavouritePostColorSuccessState());
     }).catchError((error) {
-      print('post change post fav error is :${error}');
+      print('post change post fav error is :$error');
       emit(ChangeFavouritePostColorErrorState());
     });
   }

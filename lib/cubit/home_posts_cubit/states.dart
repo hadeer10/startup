@@ -35,3 +35,11 @@ class HomeAddCommentErrorState extends HomeStates {
 
   HomeAddCommentErrorState(this.error);
 }
+
+class HomeUserLogoutSuccessState extends HomeStates {}
+
+class HomeUserLogoutErrorState extends HomeStates {
+  final String error;
+
+  HomeUserLogoutErrorState(this.error);
+}
